@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -29,6 +30,16 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: AnimatedContainer(
+        duration: Duration(seconds: 10),
+        child: Container(
+          height: 200,
+          width: double.infinity,
+          child: Image.network(
+              ""),
+        ),
+      ),
+    );
   }
 }
