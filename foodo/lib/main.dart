@@ -1,4 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+
+import 'Onboarding/onboarding_view.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -29,15 +34,22 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  void initState() {
+    Timer(
+        Duration(seconds: 5),
+        () => Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (b) => Onboarding())));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AnimatedContainer(
-        duration: Duration(seconds: 10),
+      body: Center(
         child: Container(
-          height: 200,
+          height: MediaQuery.of(context).size.height / 2,
           width: double.infinity,
-          child: Image.network(
-              ""),
+          child: Image.asset("assets/images/FooD.gif"),
         ),
       ),
     );
