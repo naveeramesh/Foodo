@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodo/Onboarding/widgets/data.dart';
 import 'package:foodo/Onboarding/widgets/pageview.dart';
 
 class Onboarding extends StatefulWidget {
@@ -18,7 +19,9 @@ class _OnboardingState extends State<Onboarding> {
         itemCount: 3,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return Page_View();
+          return Page_View(
+            items: data_list[index],
+          );
         },
       ),
     );
