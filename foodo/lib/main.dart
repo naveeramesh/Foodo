@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'Onboarding/onboarding_view.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -45,6 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Container(
           height: MediaQuery.of(context).size.height / 2,
