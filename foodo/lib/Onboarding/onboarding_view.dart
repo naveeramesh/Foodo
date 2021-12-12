@@ -90,9 +90,9 @@ class _OnboardingState extends State<Onboarding> {
                           child: Center(
                               child: IconButton(
                             onPressed: () {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (b) => Signup()));
-                        },
+                              Navigator.pushReplacement(context,
+                                  MaterialPageRoute(builder: (b) => Signup()));
+                            },
                             icon: Icon(
                               Icons.arrow_forward_ios_outlined,
                               color: Colors.white,
