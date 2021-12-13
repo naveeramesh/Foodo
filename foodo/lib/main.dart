@@ -1,10 +1,14 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'Onboarding/onboarding_view.dart';
 
-void main() {
+void main() async {
+  await WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
