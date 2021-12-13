@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/Signin.dart';
+import 'package:foodo/Auth/Signup.dart';
 import 'package:foodo/Auth/service/google_auth.dart';
 import 'package:foodo/Auth/widgets/footer.dart';
+import 'package:foodo/Main/home_view.dart';
 import 'package:foodo/constants/button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -92,7 +94,10 @@ class _Signin_textfieldState extends State<Signin_textfield> {
             Spacer(),
             GestureDetector(
               onTap: () {
-                signin();
+                signin().whenComplete(() {
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (b) => HomeScreen()));
+                });
               },
               child: Container(
                   height: 30,
@@ -106,7 +111,7 @@ class _Signin_textfieldState extends State<Signin_textfield> {
             GestureDetector(
                 onTap: () {
                   Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (b) => Signin()));
+                      context, MaterialPageRoute(builder: (b) => Signup()));
                 },
                 child:
                     BottomText.Footer(Colors.grey, "Don't have an account?")),
