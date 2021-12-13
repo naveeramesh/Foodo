@@ -36,8 +36,11 @@ class _Page_ViewState extends State<Page_View> {
           padding: EdgeInsets.only(top: 10),
           child: Container(
             child: Center(
-                child: Helper.text("${widget.items.description}", 18, 0,
-                    Colors.black, FontWeight.normal)),
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Helper.text("${widget.items.description}", 18, 0,
+                  Colors.black, FontWeight.normal),
+            )),
           )),
     ]);
   }
