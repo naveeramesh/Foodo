@@ -1,28 +1,37 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class Authentication {
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+final FirebaseAuth _auth = FirebaseAuth.instance;
+final GoogleSignIn googleSignIn = GoogleSignIn();
+String name = "";
+String email = "";
+String imgurl = "";
 
-  Future google_signin() async {
+Future<User?> signin() async {
+  try {
     final GoogleSignInAccount? googleSignInAccount =
-        await GoogleSignIn().signIn();
+        await googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication =
         await googleSignInAccount!.authentication;
-    final OAuthCredential googleAuthCredential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken);
-    final UserCredential userCredential =
-        await _firebaseAuth.signInWithCredential(googleAuthCredential);
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      idToken: googleSignInAuthentication.idToken,
+      accessToken: googleSignInAuthentication.accessToken,
+    );
+    final userCredential = await _auth.signInWithCredential(credential);
     final User? user = userCredential.user;
-    assert(user!.displayName != null);
-    assert(user!.email != null);
-    final User? currentUser = _firebaseAuth.currentUser;
-    assert(currentUser!.uid == user!.uid);
-  }
+    assert(await user!.getIdToken() != null);
 
-  Future googleSignOut() async {
-    await _googleSignIn.signOut();
+    final User? currentuser = _auth.currentUser;
+    assert(currentuser!.uid == user!.uid);
+    return user;
+  } catch (e) {
+    debugPrint(e.toString());
   }
+}
+
+Future<String> signout() async {
+  await googleSignIn.signOut();
+  await _auth.signOut();
+  return "done";
 }

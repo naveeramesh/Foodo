@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/Signin.dart';
+import 'package:foodo/Auth/service/google_auth.dart';
 import 'package:foodo/Auth/widgets/footer.dart';
 import 'package:foodo/constants/button.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -89,11 +90,16 @@ class _Signin_textfieldState extends State<Signin_textfield> {
                   "Signin", Colors.white),
             ),
             Spacer(),
-            Container(
-                height: 30,
-                width: double.infinity,
-                child: Image.network(
-                    "https://cdn-icons-png.flaticon.com/512/2702/2702602.png")),
+            GestureDetector(
+              onTap: () {
+                signin();
+              },
+              child: Container(
+                  height: 30,
+                  width: double.infinity,
+                  child: Image.network(
+                      "https://cdn-icons-png.flaticon.com/512/2702/2702602.png")),
+            ),
             SizedBox(
               height: 10,
             ),
