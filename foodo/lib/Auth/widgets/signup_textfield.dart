@@ -6,16 +6,16 @@ import 'package:foodo/Auth/widgets/footer.dart';
 import 'package:foodo/constants/button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Text_Field extends StatefulWidget {
-  const Text_Field({
+class Signup_textfield extends StatefulWidget {
+  const Signup_textfield({
     Key? key,
   }) : super(key: key);
 
   @override
-  _Text_FieldState createState() => _Text_FieldState();
+  _Signup_textfieldState createState() => _Signup_textfieldState();
 }
 
-class _Text_FieldState extends State<Text_Field> {
+class _Signup_textfieldState extends State<Signup_textfield> {
   TextEditingController email = new TextEditingController();
   TextEditingController password = new TextEditingController();
   TextEditingController confirmpassword = new TextEditingController();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/widgets/header.dart';
 import 'package:foodo/Auth/widgets/signin_textfield.dart';
-import 'package:foodo/Auth/widgets/signuo_textfield.dart';
+import 'package:foodo/Auth/widgets/signup_textfield.dart';
 
 class Signin extends StatefulWidget {
   const Signin({Key? key}) : super(key: key);

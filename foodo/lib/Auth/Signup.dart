@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/widgets/header.dart';
-import 'package:foodo/Auth/widgets/signuo_textfield.dart';
+import 'package:foodo/Auth/widgets/signup_textfield.dart';
 import 'package:foodo/constants/text.dart';
 
 class Signup extends StatefulWidget {
@@ -23,7 +23,7 @@ class _SignupState extends State<Signup> {
               text: "Welcome to Foodo",
               subtext: "Create your account",
             ),
-            Text_Field(),
+            Signup_textfield(),
           ],
         ),
       ),

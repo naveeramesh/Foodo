@@ -21,7 +21,6 @@ class _Signin_textfieldState extends State<Signin_textfield> {
   Widget build(BuildContext context) {
     return Form(
       child: Flexible(
-        // height: 500,
         child: Column(
           children: [
             Padding(
@@ -85,9 +84,18 @@ class _Signin_textfieldState extends State<Signin_textfield> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  top: 20, left: 20.0, right: 20, bottom: 10),
+                  top: 30, left: 20.0, right: 20, bottom: 10),
               child: Buttons.Button(Colors.orange[800], 10, 70, double.infinity,
                   "Signin", Colors.white),
+            ),
+            Spacer(),
+            Container(
+                height: 30,
+                width: double.infinity,
+                child: Image.network(
+                    "https://cdn-icons-png.flaticon.com/512/2702/2702602.png")),
+            SizedBox(
+              height: 10,
             ),
             GestureDetector(
                 onTap: () {
@@ -96,11 +104,9 @@ class _Signin_textfieldState extends State<Signin_textfield> {
                 },
                 child:
                     BottomText.Footer(Colors.grey, "Don't have an account?")),
-            Container(
-                height: 60,
-                width: double.infinity,
-                child: Image.network(
-                    "https://cdn-icons-png.flaticon.com/512/2702/2702602.png")),
+            SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
