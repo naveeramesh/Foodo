@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/widgets/header.dart';
+import 'package:foodo/Auth/widgets/signin_textfield.dart';
 import 'package:foodo/Auth/widgets/signuo_textfield.dart';
-import 'package:foodo/constants/text.dart';
 
-class Signup extends StatefulWidget {
-  const Signup({Key? key}) : super(key: key);
+class Signin extends StatefulWidget {
+  const Signin({Key? key}) : super(key: key);
 
   @override
-  _SignupState createState() => _SignupState();
+  _SigninState createState() => _SigninState();
 }
 
-class _SignupState extends State<Signup> {
+class _SigninState extends State<Signin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,10 +20,10 @@ class _SignupState extends State<Signup> {
         child: Column(
           children: [
             Header(
-              text: "Welcome to Foodo",
-              subtext: "Create your account",
+              text: "Welcome back",
+              subtext: "Login to your account",
             ),
-            Text_Field(),
+            Signin_textfield()
           ],
         ),
       ),
