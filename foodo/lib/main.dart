@@ -1,13 +1,15 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:foodo/Main/home_view.dart';
 
 import 'Onboarding/onboarding_view.dart';
 
 void main() async {
-  await WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   runApp(const MyApp());
 }
@@ -36,12 +38,18 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   void initState() {
     Timer(
         Duration(seconds: 5),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (b) => Onboarding())));
+            context,
+            MaterialPageRoute(
+                builder: (b) => _auth.currentUser?.uid == null
+                    ? Onboarding()
+                    : HomeScreen())));
     super.initState();
   }
 
