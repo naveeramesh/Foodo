@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "792258475428",
+    "project_id": "foodo-6ff8d",
+    "storage_bucket": "foodo-6ff8d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792258475428:android:613a9d585312207c833d31",
+        "android_client_info": {
+          "package_name": "com.example.foodo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "792258475428-m4dinnpcfmmee6rts2dg55krecn078if.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.foodo",
+            "certificate_hash": "a4ae8f649dc59dab54b36486fcabc55107367959"
+          }
+        },
+        {
+          "client_id": "792258475428-h8jruaf6v8f1hq4innlb8pakgn56mfq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW1Pfa4Zm4uwHB5N6Aep2hE--bayrYcgk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "792258475428-h8jruaf6v8f1hq4innlb8pakgn56mfq8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
