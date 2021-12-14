@@ -21,6 +21,7 @@ class Signup_textfield extends StatefulWidget {
 }
 
 class _Signup_textfieldState extends State<Signup_textfield> {
+  bool isloading = false;
   bool _isVisible = false;
   bool _isPasswordEightCharacters = false;
   bool _hasPasswordOneNumber = false;
@@ -277,23 +278,35 @@ class _Signup_textfieldState extends State<Signup_textfield> {
             Padding(
               padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 10),
               child: GestureDetector(
-                onTap: () {
-                  print(email.text);
-                  print(password.text);
-                  print(confirmpassword.text);
-                  if (email.text.isNotEmpty &&
-                      password.text == confirmpassword.text) {
-                    signup_email();
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        backgroundColor: Colors.grey,
-                        content: Helper.text("Provide correct password", 15, 0,
-                            Colors.black, FontWeight.normal)));
-                  }
-                },
-                child: Buttons.Button(Colors.orange[800], 10, 60,
-                    double.infinity, "Register", Colors.white),
-              ),
+                  onTap: () {
+                    setState(() {
+                      isloading = true;
+                    });
+                    print(email.text);
+                    print(password.text);
+                    print(confirmpassword.text);
+                    if (email.text.isNotEmpty &&
+                        password.text == confirmpassword.text) {
+                      signup_email();
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.grey,
+                          content: Helper.text("Provide correct password", 15,
+                              0, Colors.black, FontWeight.normal)));
+                    }
+                  },
+                  child: Container(
+                    height: 60,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Colors.orange[800],
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                        child: isloading
+                            ? CircularProgressIndicator(color: Colors.white)
+                            : Helper.text("Register", 20, 0, Colors.white,
+                                FontWeight.bold)),
+                  )),
             ),
             GestureDetector(
                 onTap: () {
@@ -312,6 +325,9 @@ class _Signup_textfieldState extends State<Signup_textfield> {
   }
 
   void signup_email() async {
+    CircularProgressIndicator(
+      color: Colors.orange[800],
+    );
     User? currentuser;
     await _auth
         .createUserWithEmailAndPassword(
