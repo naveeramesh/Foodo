@@ -288,6 +288,14 @@ class _Signup_textfieldState extends State<Signup_textfield> {
                     if (email.text.isNotEmpty &&
                         password.text == confirmpassword.text) {
                       signup_email();
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.grey,
+                          content: Helper.text(
+                              "Verification mail was sent,Check your inbox",
+                              15,
+                              0,
+                              Colors.black,
+                              FontWeight.normal)));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           backgroundColor: Colors.grey,
@@ -324,6 +332,11 @@ class _Signup_textfieldState extends State<Signup_textfield> {
     );
   }
 
+  void sendverification() async {
+    User? firebaseUser = FirebaseAuth.instance.currentUser;
+    firebaseUser!.sendEmailVerification();
+  }
+
   void signup_email() async {
     CircularProgressIndicator(
       color: Colors.orange[800],
@@ -337,7 +350,7 @@ class _Signup_textfieldState extends State<Signup_textfield> {
       var userid = currentuser!.uid;
       var getemail = currentuser!.email;
       var getname = currentuser!.displayName;
-
+      sendverification();
       save_data();
     }).catchError((e) {
       Navigator.pop(context);
