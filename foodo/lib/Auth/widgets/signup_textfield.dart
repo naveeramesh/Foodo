@@ -4,10 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/Signin.dart';
-import 'package:foodo/Auth/service/google_auth.dart';
 import 'package:foodo/Auth/widgets/footer.dart';
 import 'package:foodo/Main/home_view.dart';
-import 'package:foodo/constants/button.dart';
 import 'package:foodo/constants/text.dart';
 import 'package:google_fonts/google_fonts.dart';
 
