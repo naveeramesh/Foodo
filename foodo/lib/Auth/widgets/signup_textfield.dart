@@ -41,7 +41,7 @@ class _Signup_textfieldState extends State<Signup_textfield> {
             Padding(
               padding: const EdgeInsets.only(left: 20.0, right: 20),
               child: Container(
-                height: 70,
+                height: 60,
                 decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(10)),
@@ -79,7 +79,7 @@ class _Signup_textfieldState extends State<Signup_textfield> {
             Padding(
               padding: const EdgeInsets.only(left: 20.0, right: 20),
               child: Container(
-                height: 70,
+                height: 60,
                 decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(10)),
@@ -130,7 +130,7 @@ class _Signup_textfieldState extends State<Signup_textfield> {
             Padding(
               padding: const EdgeInsets.only(left: 20.0, right: 20),
               child: Container(
-                height: 70,
+                height: 60,
                 decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(10)),
