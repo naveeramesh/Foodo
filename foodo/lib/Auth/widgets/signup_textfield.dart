@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/Signin.dart';
+import 'package:foodo/Auth/service/google_auth.dart';
 import 'package:foodo/Auth/widgets/footer.dart';
 import 'package:foodo/Main/home_view.dart';
 import 'package:foodo/constants/button.dart';
@@ -134,6 +136,7 @@ class _Signup_textfieldState extends State<Signup_textfield> {
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: TextFormField(
+                    obscureText: !_isVisible,
                     controller: confirmpassword,
                     cursorColor: Colors.orange[800],
                     decoration: InputDecoration(
@@ -275,7 +278,18 @@ class _Signup_textfieldState extends State<Signup_textfield> {
               padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 10),
               child: GestureDetector(
                 onTap: () {
-                  signup_email();
+                  print(email.text);
+                  print(password.text);
+                  print(confirmpassword.text);
+                  if (email.text.isNotEmpty &&
+                      password.text == confirmpassword.text) {
+                    signup_email();
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: Colors.grey,
+                        content: Helper.text("Provide correct password", 15, 0,
+                            Colors.black, FontWeight.normal)));
+                  }
                 },
                 child: Buttons.Button(Colors.orange[800], 10, 60,
                     double.infinity, "Register", Colors.white),
@@ -307,6 +321,8 @@ class _Signup_textfieldState extends State<Signup_textfield> {
       var userid = currentuser!.uid;
       var getemail = currentuser!.email;
       var getname = currentuser!.displayName;
+
+      save_data();
     }).catchError((e) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -316,7 +332,19 @@ class _Signup_textfieldState extends State<Signup_textfield> {
     if (currentuser != null) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (b) => HomeScreen()));
-    } else {}
+    }
+  }
+
+  void save_data() {
+    Map<String, dynamic> user_data = {
+      'uid': _auth.currentUser!.uid,
+      "name": _auth.currentUser!.displayName,
+      "email": _auth.currentUser!.email,
+    };
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc(_auth.currentUser!.uid)
+        .set(user_data);
   }
 
   onPasswordChanged(String password) {
