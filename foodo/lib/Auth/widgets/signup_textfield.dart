@@ -289,7 +289,7 @@ class _Signup_textfieldState extends State<Signup_textfield> {
                         password.text == confirmpassword.text) {
                       signup_email();
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: Colors.grey,
+                          backgroundColor: Colors.grey[400],
                           content: Helper.text(
                               "Verification mail was sent,Check your inbox",
                               15,
@@ -298,7 +298,7 @@ class _Signup_textfieldState extends State<Signup_textfield> {
                               FontWeight.normal)));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: Colors.grey,
+                          backgroundColor: Colors.grey[400],
                           content: Helper.text("Provide correct password", 15,
                               0, Colors.black, FontWeight.normal)));
                     }
