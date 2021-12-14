@@ -1,9 +1,12 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/Signin.dart';
 import 'package:foodo/Auth/widgets/footer.dart';
+import 'package:foodo/Main/home_view.dart';
 import 'package:foodo/constants/button.dart';
+import 'package:foodo/constants/text.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Signup_textfield extends StatefulWidget {
@@ -16,14 +19,20 @@ class Signup_textfield extends StatefulWidget {
 }
 
 class _Signup_textfieldState extends State<Signup_textfield> {
+  bool _isVisible = false;
+  bool _isPasswordEightCharacters = false;
+  bool _hasPasswordOneNumber = false;
+  bool _hasPasswordOneSplCh = false;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  final _formKey = GlobalKey<FormState>();
   TextEditingController email = new TextEditingController();
   TextEditingController password = new TextEditingController();
   TextEditingController confirmpassword = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Flexible(
-        // height: 500,
         child: Column(
           children: [
             Padding(
@@ -37,6 +46,13 @@ class _Signup_textfieldState extends State<Signup_textfield> {
                   padding: const EdgeInsets.all(12.0),
                   child: TextFormField(
                     controller: email,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Enter a valid mail id";
+                      } else {
+                        value.contains("@");
+                      }
+                    },
                     cursorColor: Colors.orange[800],
                     decoration: InputDecoration(
                       hintText: "Email",
@@ -67,9 +83,29 @@ class _Signup_textfieldState extends State<Signup_textfield> {
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: TextFormField(
+                    onChanged: (password) => onPasswordChanged(password),
+                    obscureText: !_isVisible,
                     controller: password,
                     cursorColor: Colors.orange[800],
                     decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _isVisible = !_isVisible;
+                          });
+                        },
+                        icon: _isVisible
+                            ? Icon(
+                                Icons.visibility,
+                                color: Colors.black,
+                                size: 18,
+                              )
+                            : Icon(
+                                Icons.visibility_off,
+                                color: Colors.grey,
+                                size: 18,
+                              ),
+                      ),
                       hintText: "Password",
                       hintStyle: GoogleFonts.ubuntu(
                         color: Colors.grey[800],
@@ -116,11 +152,134 @@ class _Signup_textfieldState extends State<Signup_textfield> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Row(
+                children: [
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 500),
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(
+                        color: _isPasswordEightCharacters
+                            ? Colors.red
+                            : Colors.transparent,
+                        border: _isPasswordEightCharacters
+                            ? Border.all(color: Colors.transparent)
+                            : Border.all(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Center(
+                      child: Icon(
+                        Icons.verified,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text("Password have 8 characters",
+                      style: GoogleFonts.ubuntu(
+                          color: _isPasswordEightCharacters
+                              ? Colors.black
+                              : Colors.transparent))
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Row(
+                children: [
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 500),
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(
+                        color: _hasPasswordOneNumber
+                            ? Colors.red
+                            : Colors.transparent,
+                        border: _hasPasswordOneNumber
+                            ? Border.all(color: Colors.transparent)
+                            : Border.all(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Center(
+                      child: Icon(
+                        Icons.verified,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Password atleast have 1 number",
+                    style: GoogleFonts.ubuntu(
+                        color: _hasPasswordOneNumber
+                            ? Colors.black
+                            : Colors.transparent),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Row(
+                children: [
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 500),
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(
+                        color: _hasPasswordOneSplCh
+                            ? Colors.red
+                            : Colors.transparent,
+                        border: _hasPasswordOneSplCh
+                            ? Border.all(color: Colors.transparent)
+                            : Border.all(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Center(
+                      child: Icon(
+                        Icons.verified,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Password atleast have 1 special character",
+                    style: GoogleFonts.ubuntu(
+                        color: _hasPasswordOneSplCh
+                            ? Colors.black
+                            : Colors.transparent),
+                  )
+                ],
+              ),
+            ),
             Spacer(),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 10),
-              child: Buttons.Button(Colors.orange[800], 10, 70, double.infinity,
-                  "Register", Colors.white),
+              child: GestureDetector(
+                onTap: () {
+                  signup_email();
+                },
+                child: Buttons.Button(Colors.orange[800], 10, 60,
+                    double.infinity, "Register", Colors.white),
+              ),
             ),
             GestureDetector(
                 onTap: () {
@@ -136,5 +295,42 @@ class _Signup_textfieldState extends State<Signup_textfield> {
         ),
       ),
     );
+  }
+
+  void signup_email() async {
+    User? currentuser;
+    await _auth
+        .createUserWithEmailAndPassword(
+            email: email.text.trim(), password: password.text.trim())
+        .then((auth) {
+      currentuser = auth.user;
+      var userid = currentuser!.uid;
+      var getemail = currentuser!.email;
+      var getname = currentuser!.displayName;
+    }).catchError((e) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Helper.text(
+              e.toString(), 20, 0, Colors.black, FontWeight.normal)));
+    });
+    if (currentuser != null) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (b) => HomeScreen()));
+    } else {}
+  }
+
+  onPasswordChanged(String password) {
+    final numericRegex = RegExp(r'[0-9]');
+    final spchar = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
+    setState(() {
+      _isPasswordEightCharacters = false;
+      if (password.length >= 8) _isPasswordEightCharacters = true;
+
+      _hasPasswordOneNumber = false;
+      if (numericRegex.hasMatch(password)) _hasPasswordOneNumber = true;
+
+      _hasPasswordOneSplCh = false;
+      if (spchar.hasMatch(password)) _hasPasswordOneSplCh = true;
+    });
   }
 }
