@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/location.dart';
+import 'package:foodo/Auth/service/google_auth.dart';
 import 'package:foodo/Auth/widgets/gender.dart';
 import 'package:foodo/Auth/widgets/textfield.dart';
 import 'package:foodo/constants/button.dart';
@@ -13,7 +16,10 @@ class Userdetails extends StatefulWidget {
 }
 
 class _UserdetailsState extends State<Userdetails> {
-  TextEditingController namecontroller = new TextEditingController();
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  bool isloading = false;
+  TextEditingController firstnamecontroller = new TextEditingController();
+  TextEditingController lastnamecontroller = new TextEditingController();
   TextEditingController phno = new TextEditingController();
   TextEditingController mail = new TextEditingController();
   @override
@@ -55,13 +61,13 @@ class _UserdetailsState extends State<Userdetails> {
             children: [
               TextField_Custom(
                 text: "First Name",
-                controller: namecontroller,
+                controller: firstnamecontroller,
                 width: MediaQuery.of(context).size.width / 2.5,
               ),
               Expanded(
                 child: TextField_Custom(
                   text: "Last Name",
-                  controller: namecontroller,
+                  controller: lastnamecontroller,
                   width: MediaQuery.of(context).size.width,
                 ),
               )
@@ -81,8 +87,39 @@ class _UserdetailsState extends State<Userdetails> {
           Spacer(),
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Buttons.Button(Colors.orange[800], 10, 60, double.infinity,
-                "Update", Colors.white),
+            child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isloading = true;
+                  });
+                  FirebaseFirestore.instance
+                      .collection("Userinfo")
+                      .doc(_auth.currentUser!.uid)
+                      .update({
+                    "firstname": firstnamecontroller.text.trim(),
+                    'lastname': lastnamecontroller.text.trim(),
+                    'name': firstnamecontroller.text.toString() +
+                        lastnamecontroller.text.toString(),
+                    'email': mail.text.trim(),
+                    'phonenumber': phno.text.trim(),
+                  }).whenComplete(() {
+                    Navigator.pushReplacement(
+                        context, MaterialPageRoute(builder: (b) => Location()));
+                  });
+                },
+                child: Container(
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.orange[800],
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                      child: isloading
+                          ? CircularProgressIndicator(
+                              strokeWidth: 2, color: Colors.white)
+                          : Helper.text(
+                              "Update", 20, 0, Colors.white, FontWeight.bold)),
+                )),
           )
         ],
       ),
