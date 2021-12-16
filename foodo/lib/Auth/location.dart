@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodo/constants/text.dart';
 import 'package:lottie/lottie.dart';
-import 'package:lottie/lottie.dart';
-
 class Location extends StatefulWidget {
   const Location({Key? key}) : super(key: key);
 
