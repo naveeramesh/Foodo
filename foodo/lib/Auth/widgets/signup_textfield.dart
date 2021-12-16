@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/Signin.dart';
+import 'package:foodo/Auth/userdetails.dart';
 import 'package:foodo/Auth/widgets/footer.dart';
 import 'package:foodo/Main/home_view.dart';
 import 'package:foodo/constants/text.dart';
@@ -358,7 +359,7 @@ class _Signup_textfieldState extends State<Signup_textfield> {
     });
     if (currentuser != null) {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (b) => HomeScreen()));
+          context, MaterialPageRoute(builder: (b) => Userdetails()));
     }
   }
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:foodo/Auth/Signin.dart';
 import 'package:foodo/Auth/Signup.dart';
 import 'package:foodo/Auth/service/google_auth.dart';
+import 'package:foodo/Auth/userdetails.dart';
 import 'package:foodo/Auth/widgets/footer.dart';
 import 'package:foodo/Main/home_view.dart';
 import 'package:foodo/constants/button.dart';
@@ -117,16 +118,16 @@ class _Signin_textfieldState extends State<Signin_textfield> {
                         child: isloading
                             ? CircularProgressIndicator(
                                 strokeWidth: 2, color: Colors.white)
-                            : Helper.text("Register", 20, 0, Colors.white,
-                                FontWeight.bold)),
+                            : Helper.text(
+                                "Login", 20, 0, Colors.white, FontWeight.bold)),
                   )),
             ),
             Spacer(),
             GestureDetector(
               onTap: () {
                 signin().whenComplete(() {
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (b) => HomeScreen()));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (b) => Userdetails()));
                 });
               },
               child: Container(

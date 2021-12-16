@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class Helper {
   int radius = 10;
   int maxradius = 40;
-  static Widget text(String msg, int size, int spacing, Color color, FontWeight fontWeight) {
+  static Widget text(String msg, int size, int spacing, Color? color, FontWeight fontWeight) {
     return Text(
       msg,
       textAlign: TextAlign.center,
