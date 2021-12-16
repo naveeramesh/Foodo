@@ -10,6 +10,6 @@ class Userdetails extends StatefulWidget {
 class _UserdetailsState extends State<Userdetails> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }
