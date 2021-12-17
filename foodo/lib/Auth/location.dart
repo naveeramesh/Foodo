@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodo/Main/home_view.dart';
 import 'package:foodo/constants/text.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -15,6 +18,7 @@ class Location extends StatefulWidget {
 
 class _LocationState extends State<Location> {
   late StreamSubscription<Position> streamSubscription;
+  FirebaseAuth _auth = FirebaseAuth.instance;
   var lattiude = '';
   var longitude = '';
   var address = '';
@@ -81,8 +85,25 @@ class _LocationState extends State<Location> {
     List<Placemark> placemark =
         await placemarkFromCoordinates(position.latitude, position.latitude);
     Placemark location = placemark[0];
-    address =
-        "${location.name}" +" "+ "${location.street}" + " "+"${location.country}";
+    address = "${location.name}" +
+        " " +
+        "${location.street}" +
+        " " +
+        "${location.country}";
+
     print(address);
+    addfirebase(address);
+  }
+
+  void addfirebase(var address) async {
+    FirebaseFirestore.instance
+        .collection("Userinfo")
+        .doc(_auth.currentUser!.uid)
+        .update({
+      'userlocation': address,
+    }).whenComplete(() {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (b) => HomeScreen()));
+    });
   }
 }
