@@ -21,7 +21,7 @@ class _OnboardingState extends State<Onboarding> {
         borderRadius: BorderRadius.all(
           Radius.circular(50),
         ),
-        color: _currentpg == index ? Colors.orange[800] : Colors.grey,
+        color: _currentpg == index ? Colors.red[800] : Colors.grey,
       ),
       margin: const EdgeInsets.only(right: 5),
       height: 10,
@@ -85,8 +85,7 @@ class _OnboardingState extends State<Onboarding> {
                         padding: const EdgeInsets.only(right: 20.0),
                         child: Container(
                           decoration: BoxDecoration(
-                              color: Colors.orange[800],
-                              shape: BoxShape.circle),
+                              color: Colors.red[800], shape: BoxShape.circle),
                           child: Center(
                               child: IconButton(
                             onPressed: () {

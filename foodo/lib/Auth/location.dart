@@ -82,7 +82,7 @@ class _LocationState extends State<Location> {
     Placemark location = placemark[0];
     address = "${location.name}" +
         " " +
-        "${location.street}" +
+        "${location.postalCode}" +
         " " +
         "${location.country}";
 
@@ -98,7 +98,9 @@ class _LocationState extends State<Location> {
       'userlocation': address,
     }).whenComplete(() {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (b) => HomeScreen()));
+          context, MaterialPageRoute(builder: (b) => HomeScreen(
+            address: address,
+          )));
     });
   }
 }

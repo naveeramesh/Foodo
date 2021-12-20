@@ -26,7 +26,7 @@ class TextField_Custom extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               child: TextFormField(
                 controller: controller,
-                cursorColor: Colors.orange[800],
+                cursorColor: Colors.red[800],
                 decoration: InputDecoration(
                   hintText: text,
                   hintStyle: GoogleFonts.ubuntu(

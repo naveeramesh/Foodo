@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:foodo/Main/services/user.dart';
+import 'package:foodo/constants/text.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final String? address;
+  const HomeScreen({Key? key, this.address}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -10,6 +13,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: UserHeader(),
+    );
   }
 }

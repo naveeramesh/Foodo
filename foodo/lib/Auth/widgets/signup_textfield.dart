@@ -55,7 +55,7 @@ class _Signup_textfieldState extends State<Signup_textfield> {
                         value.contains("@");
                       }
                     },
-                    cursorColor: Colors.orange[800],
+                    cursorColor: Colors.red[800],
                     decoration: InputDecoration(
                       hintText: "Email",
                       hintStyle: GoogleFonts.ubuntu(
@@ -88,7 +88,7 @@ class _Signup_textfieldState extends State<Signup_textfield> {
                     onChanged: (password) => onPasswordChanged(password),
                     obscureText: !_isVisible,
                     controller: password,
-                    cursorColor: Colors.orange[800],
+                    cursorColor: Colors.red[800],
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         onPressed: () {
@@ -138,7 +138,7 @@ class _Signup_textfieldState extends State<Signup_textfield> {
                   child: TextFormField(
                     obscureText: !_isVisible,
                     controller: confirmpassword,
-                    cursorColor: Colors.orange[800],
+                    cursorColor: Colors.red[800],
                     decoration: InputDecoration(
                       hintText: "Confirm Password",
                       hintStyle: GoogleFonts.ubuntu(
@@ -306,7 +306,7 @@ class _Signup_textfieldState extends State<Signup_textfield> {
                     height: 60,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        color: Colors.orange[800],
+                        color: Colors.red[800],
                         borderRadius: BorderRadius.circular(10)),
                     child: Center(
                         child: isloading
@@ -338,7 +338,7 @@ class _Signup_textfieldState extends State<Signup_textfield> {
 
   void signup_email() async {
     CircularProgressIndicator(
-      color: Colors.orange[800],
+      color: Colors.red[800],
     );
     User? currentuser;
     await _auth
