@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodo/Main/services/user.dart';
-import 'package:foodo/constants/text.dart';
+import 'widgets/user.dart';
+import 'widgets/carosuel.dart';
 
 class HomeScreen extends StatefulWidget {
   final String? address;
@@ -14,8 +14,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: UserHeader(),
+      body: Column(
+        children: [UserHeader(), CarosuelLider()],
+      ),
     );
   }
 }

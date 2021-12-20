@@ -45,7 +45,7 @@ class _UserHeaderState extends State<UserHeader> {
           children: [
             Icon(
               Icons.location_on,
-              color: Colors.black26,
+              color: Colors.red[800],
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10.0),
@@ -62,6 +62,13 @@ class _UserHeaderState extends State<UserHeader> {
                 ],
               ),
             ),
+            Spacer(),
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.red[800],
+                ))
           ],
         ),
       ),
