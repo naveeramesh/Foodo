@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:foodo/constants/text.dart';
 
 class Category extends StatefulWidget {
   const Category({Key? key}) : super(key: key);
@@ -20,20 +21,31 @@ class _CategoryState extends State<Category> {
               scrollDirection: Axis.horizontal,
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20.0,
+                return Stack(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 20.0,
+                    ),
+                    child: Container(
+                      width: 100,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  snapshot.data!.docs[index]['Image']),
+                              fit: BoxFit.cover)),
+                    ),
                   ),
-                  child: Container(
-                    width: 100,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                snapshot.data!.docs[index]['Image']),
-                            fit: BoxFit.cover)),
-                  ),
-                );
+                  Positioned(
+                      bottom: 0,
+                      left: 25,
+                      child: Helper.text(
+                          "${snapshot.data!.docs[index]['name']}",
+                          12,
+                          0,
+                          Colors.white,
+                          FontWeight.w600))
+                ]);
               },
             );
           },

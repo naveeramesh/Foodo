@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodo/Main/widgets/categouries.dart';
+import 'package:foodo/Main/widgets/top_orders.dart';
 import 'package:foodo/constants/text.dart';
 import 'widgets/user.dart';
 import 'widgets/carosuel.dart';
@@ -28,7 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          Category()
+          Category(),
+          TopOrders()
         ],
       ),
     );
