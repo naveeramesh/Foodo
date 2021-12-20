@@ -1,11 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodo/Auth/Signup/email_signup.dart';
 import 'package:foodo/Auth/widgets/header.dart';
 import 'package:foodo/Auth/widgets/textfield.dart';
 import 'package:foodo/Main/home_view.dart';
 import 'package:foodo/constants/button.dart';
 import 'package:foodo/constants/text.dart';
+
+import '../Signup.dart';
+import '../widgets/footer.dart';
 
 class Password extends StatefulWidget {
   final TextEditingController emailcontroller;
@@ -16,6 +20,7 @@ class Password extends StatefulWidget {
 }
 
 class _PasswordState extends State<Password> {
+  bool isloading = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
   TextEditingController password = TextEditingController();
   @override
@@ -31,13 +36,44 @@ class _PasswordState extends State<Password> {
               text: "Password", controller: password, width: double.infinity),
           Spacer(),
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 10),
             child: GestureDetector(
-              onTap: () {},
-              child: Buttons.Button(Colors.red[800], 10, 60, double.infinity,
-                  "Signin", Colors.white),
-            ),
-          )
+                onTap: () {
+                  setState(() {
+                    isloading = true;
+                  });
+                  if (password.text.isNotEmpty) {
+                    _signin();
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: Colors.grey,
+                        content: Helper.text("Enter valid details", 20, 0,
+                            Colors.black, FontWeight.normal)));
+                  }
+                },
+                child: Container(
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.red[800],
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                      child: isloading
+                          ? CircularProgressIndicator(
+                              strokeWidth: 2, color: Colors.white)
+                          : Helper.text(
+                              "Signin", 20, 0, Colors.white, FontWeight.bold)),
+                )),
+          ),
+          GestureDetector(
+              onTap: () {
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (b) => Signup_Email()));
+              },
+              child: BottomText.Footer(Colors.grey, "Don't have an account?")),
+          SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );

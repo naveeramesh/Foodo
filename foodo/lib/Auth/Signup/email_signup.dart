@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/widgets/header.dart';
-import 'package:foodo/Auth/widgets/password.dart';
+import 'package:foodo/Auth/Signin/password.dart';
 import 'package:foodo/Auth/widgets/textfield.dart';
 import 'package:foodo/constants/text.dart';
 
-class Signin_New extends StatefulWidget {
-  const Signin_New({Key? key}) : super(key: key);
+class Signup_Email extends StatefulWidget {
+  const Signup_Email({Key? key}) : super(key: key);
 
   @override
-  _Signin_NewState createState() => _Signin_NewState();
+  _Signup_EmailState createState() => _Signup_EmailState();
 }
 
-class _Signin_NewState extends State<Signin_New> {
+class _Signup_EmailState extends State<Signup_Email> {
   TextEditingController emailcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -43,9 +43,8 @@ class _Signin_NewState extends State<Signin_New> {
         child: Column(
           children: [
             Header(
-              text: "Welcome back",
-              subtext:
-                  "We are so happy that you came back to satisfy your hunger enjoy the unlimited services.",
+              text: "Create an account",
+              subtext: "So you can enjoy the delicious food by door step",
             ),
             TextField_Custom(
                 text: "Email",

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/service/google_auth.dart';
-import 'package:foodo/Auth/email.dart';
+import 'package:foodo/Auth/Signin/email.dart';
 import 'package:foodo/Auth/userdetails.dart';
 import 'package:foodo/constants/button.dart';
 import 'package:foodo/constants/text.dart';
