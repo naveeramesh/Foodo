@@ -52,7 +52,8 @@ class _StartScreenState extends State<StartScreen> {
             padding: const EdgeInsets.only(left: 30.0, right: 30, bottom: 20),
             child: GestureDetector(
               onTap: () {
-                Signin_New();
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (b) => Signin_New()));
               },
               child: Buttons.Button(Colors.red[800]!, 20, 60, double.infinity,
                   "Continue with email", Colors.white),

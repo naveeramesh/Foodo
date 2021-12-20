@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:foodo/Onboarding/onboarding_view.dart';
 import 'package:foodo/constants/text.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Header extends StatefulWidget {
   final String text;
   final String subtext;
-  const Header({Key? key, required this.text,required this.subtext}) : super(key: key);
+  const Header({Key? key, required this.text, required this.subtext})
+      : super(key: key);
 
   @override
   _HeaderState createState() => _HeaderState();
@@ -17,6 +19,7 @@ class _HeaderState extends State<Header> {
     return Container(
       height: 200,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -45,14 +48,19 @@ class _HeaderState extends State<Header> {
               ),
             ],
           ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 10),
-                child: Helper.text(widget.subtext, 15, 0, Colors.grey,
-                    FontWeight.normal),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(left: 22.0, top: 9),
+            child: Container(
+                constraints: BoxConstraints(maxWidth: 350),
+                child: Text(
+                 widget.subtext,
+                  textAlign: TextAlign.start,
+                  style: GoogleFonts.josefinSans(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.grey,
+                      letterSpacing: 0),
+                )),
           )
         ],
       ),

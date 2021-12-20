@@ -20,7 +20,7 @@ class TextField_Custom extends StatelessWidget {
             height: 60,
             width: width,
             decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(10)),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
@@ -29,7 +29,7 @@ class TextField_Custom extends StatelessWidget {
                 cursorColor: Colors.red[800],
                 decoration: InputDecoration(
                   hintText: text,
-                  hintStyle: GoogleFonts.ubuntu(
+                  hintStyle: GoogleFonts.josefinSans(
                     color: Colors.grey[800],
                     fontSize: 16,
                     fontWeight: FontWeight.normal,
