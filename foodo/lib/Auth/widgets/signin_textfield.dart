@@ -127,7 +127,7 @@ class _Signin_textfieldState extends State<Signin_textfield> {
               onTap: () {
                 signin().whenComplete(() {
                   Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (b) => HomeScreen()));
+                      context, MaterialPageRoute(builder: (b) => Userdetails()));
                 });
               },
               child: Container(
@@ -183,7 +183,7 @@ class _Signin_textfieldState extends State<Signin_textfield> {
         .get()
         .whenComplete(() {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (b) => HomeScreen()));
+          context, MaterialPageRoute(builder: (b) =>HomeScreen()));
     });
   }
 }

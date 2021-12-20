@@ -45,7 +45,7 @@ class _LocationState extends State<Location> {
   }
 
   void getlocation() async {
-    bool serviceEnabled;
+    bool serviceEnabled = true;
     LocationPermission permission;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -78,7 +78,7 @@ class _LocationState extends State<Location> {
 
   Future<void> getAddress(Position position) async {
     List<Placemark> placemark =
-        await placemarkFromCoordinates(position.latitude, position.latitude);
+        await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark location = placemark[0];
     address = "${location.name}" +
         " " +

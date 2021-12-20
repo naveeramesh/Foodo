@@ -346,9 +346,7 @@ class _Signup_textfieldState extends State<Signup_textfield> {
             email: email.text.trim(), password: password.text.trim())
         .then((auth) {
       currentuser = auth.user;
-      var userid = currentuser!.uid;
-      var getemail = currentuser!.email;
-      var getname = currentuser!.displayName;
+
       sendverification();
       save_data();
     }).catchError((e) {
