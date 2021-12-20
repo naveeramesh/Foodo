@@ -124,22 +124,6 @@ class _Signin_textfieldState extends State<Signin_textfield> {
             ),
             Spacer(),
             GestureDetector(
-              onTap: () {
-                signin().whenComplete(() {
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (b) => Userdetails()));
-                });
-              },
-              child: Container(
-                  height: 20,
-                  width: double.infinity,
-                  child: Image.network(
-                      "https://cdn-icons-png.flaticon.com/512/2702/2702602.png")),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            GestureDetector(
                 onTap: () {
                   Navigator.pushReplacement(
                       context, MaterialPageRoute(builder: (b) => Signup()));
@@ -183,7 +167,7 @@ class _Signin_textfieldState extends State<Signin_textfield> {
         .get()
         .whenComplete(() {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (b) =>HomeScreen()));
+          context, MaterialPageRoute(builder: (b) => HomeScreen()));
     });
   }
 }

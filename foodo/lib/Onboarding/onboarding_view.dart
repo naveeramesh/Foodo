@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/Signin.dart';
 import 'package:foodo/Auth/Signup.dart';
+import 'package:foodo/Onboarding/startscreen.dart';
 import 'package:foodo/Onboarding/widgets/data.dart';
 import 'package:foodo/Onboarding/widgets/pageview.dart';
 import 'package:foodo/constants/text.dart';
@@ -45,10 +46,10 @@ class _OnboardingState extends State<Onboarding> {
                   GestureDetector(
                       onTap: () {
                         Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (b) => Signup()));
+                            MaterialPageRoute(builder: (b) => StartScreen()));
                       },
                       child: Helper.text(
-                          "Skip", 15, 0, Colors.black, FontWeight.normal))
+                          "Skip", 15, 0, Colors.black, FontWeight.bold))
                 ],
               ),
             ),
@@ -83,7 +84,7 @@ class _OnboardingState extends State<Onboarding> {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (b) => Signin()));
+                            MaterialPageRoute(builder: (b) => StartScreen()));
                       },
                       child: Container(
                         height: 60,
@@ -92,7 +93,7 @@ class _OnboardingState extends State<Onboarding> {
                           color: Colors.red[800],
                         ),
                         child: Center(
-                            child: Helper.text("Signin", 20, 0, Colors.white,
+                            child: Helper.text("Coninue", 20, 0, Colors.white,
                                 FontWeight.bold)),
                       ),
                     ),
