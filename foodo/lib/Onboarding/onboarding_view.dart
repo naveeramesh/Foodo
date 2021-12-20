@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodo/Auth/Signin.dart';
 import 'package:foodo/Auth/Signup.dart';
 import 'package:foodo/Onboarding/widgets/data.dart';
 import 'package:foodo/Onboarding/widgets/pageview.dart';
@@ -71,35 +72,30 @@ class _OnboardingState extends State<Onboarding> {
                     height: 60,
                     width: double.infinity,
                     child: Padding(
-                        padding: EdgeInsets.only(top: 20),
+                        padding: EdgeInsets.only(top: 20, left: 20),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(data_list.length,
                               (int index) => _buildDots(index: index)),
                         )),
                   )
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 20.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.red[800], shape: BoxShape.circle),
-                          child: Center(
-                              child: IconButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(context,
-                                  MaterialPageRoute(builder: (b) => Signup()));
-                            },
-                            icon: Icon(
-                              Icons.arrow_forward_ios_outlined,
-                              color: Colors.white,
-                            ),
-                          )),
+                : Padding(
+                    padding: const EdgeInsets.only(right: 20.0, left: 20),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (b) => Signin()));
+                      },
+                      child: Container(
+                        height: 60,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.red[800],
                         ),
+                        child: Center(
+                            child: Helper.text("Signin", 20, 0, Colors.white,
+                                FontWeight.bold)),
                       ),
-                    ],
+                    ),
                   ),
             SizedBox(
               height: 20,

@@ -30,8 +30,8 @@ class _Page_ViewState extends State<Page_View> {
       Padding(
           padding: EdgeInsets.only(bottom: 10),
           child: Container(
-              child: Helper.text("${widget.items.title}", 21, 0, Colors.black,
-                  FontWeight.w500))),
+              child: Helper.text("${widget.items.title}", 21, 0,
+                  Colors.red[800], FontWeight.bold))),
       Padding(
           padding: EdgeInsets.only(top: 10),
           child: Container(
