@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/widgets/header.dart';
+import 'package:foodo/Auth/widgets/password.dart';
 import 'package:foodo/Auth/widgets/textfield.dart';
+import 'package:foodo/constants/text.dart';
 
 class Signin_New extends StatefulWidget {
   const Signin_New({Key? key}) : super(key: key);
@@ -21,7 +23,19 @@ class _Signin_NewState extends State<Signin_New> {
           color: Colors.white,
           size: 25,
         ),
-        onPressed: () {},
+        onPressed: () {
+          emailcontroller.text.isEmpty
+              ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  backgroundColor: Colors.grey[400],
+                  content: Helper.text("Enter your mail id to continue", 20, 0,
+                      Colors.black, FontWeight.normal)))
+              : Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (b) => Password(
+                            emailcontroller: emailcontroller,
+                          )));
+        },
       ),
       backgroundColor: Colors.white,
       body: Container(
