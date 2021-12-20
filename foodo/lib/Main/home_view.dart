@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodo/Main/widgets/categouries.dart';
+import 'package:foodo/constants/text.dart';
 import 'widgets/user.dart';
 import 'widgets/carosuel.dart';
 
@@ -16,9 +17,19 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [UserHeader(), 
-        CarosuelLider(),
-        Category()],
+        children: [
+          UserHeader(),
+          CarosuelLider(),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Row(
+              children: [
+                Helper.text("Categories", 18, 0, Colors.black, FontWeight.w600),
+              ],
+            ),
+          ),
+          Category()
+        ],
       ),
     );
   }
