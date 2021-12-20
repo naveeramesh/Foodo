@@ -30,6 +30,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Category(),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Row(
+              children: [
+                Helper.text("Top Orders", 18, 0, Colors.black, FontWeight.w600),
+              ],
+            ),
+          ),
           TopOrders()
         ],
       ),
