@@ -126,12 +126,12 @@ class _Signin_textfieldState extends State<Signin_textfield> {
             GestureDetector(
               onTap: () {
                 signin().whenComplete(() {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (b) => Userdetails()));
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (b) => HomeScreen()));
                 });
               },
               child: Container(
-                  height: 30,
+                  height: 20,
                   width: double.infinity,
                   child: Image.network(
                       "https://cdn-icons-png.flaticon.com/512/2702/2702602.png")),
