@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodo/Auth/service/google_auth.dart';
 import 'package:foodo/Auth/Signin/email.dart';
@@ -13,6 +14,7 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
+  FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +42,15 @@ class _StartScreenState extends State<StartScreen> {
             child: GestureDetector(
               onTap: () {
                 signin().whenComplete(() {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (b) => Userdetails()));
+                  if (_auth.currentUser?.uid == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: Colors.grey[400],
+                        content: Helper.text("Signin to order food", 15, 0,
+                            Colors.black, FontWeight.normal)));
+                  } else {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (b) => Userdetails()));
+                  }
                 });
               },
               child: Buttons.Button(Colors.grey[300], 20, 60, double.infinity,

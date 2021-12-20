@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:foodo/Auth/widgets/header.dart';
 import 'package:foodo/Auth/widgets/textfield.dart';
 import 'package:foodo/constants/text.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../userdetails.dart';
 
@@ -17,13 +18,13 @@ class Password_Signup extends StatefulWidget {
 
 class _Password_SignupState extends State<Password_Signup> {
   bool isloading = false;
-
-  bool _isVisible = false;
+  bool _isvisible = false;
   bool _isPasswordEightCharacters = false;
   bool _hasPasswordOneNumber = false;
   bool _hasPasswordOneSplCh = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
   TextEditingController password = TextEditingController();
+  TextEditingController cpcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,9 +33,177 @@ class _Password_SignupState extends State<Password_Signup> {
         children: [
           Header(
               text: "Continue with password",
-              subtext: "Type your password to login"),
+              subtext: "Type your password to register"),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0, right: 20),
+            child: Container(
+              height: 60,
+              decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(10)),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: TextFormField(
+                  onChanged: (password) => onPasswordChanged(password),
+                  obscureText: !_isvisible,
+                  controller: password,
+                  cursorColor: Colors.red[800],
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _isvisible = !_isvisible;
+                        });
+                      },
+                      icon: _isvisible
+                          ? Icon(
+                              Icons.visibility,
+                              color: Colors.black,
+                              size: 18,
+                            )
+                          : Icon(
+                              Icons.visibility_off,
+                              color: Colors.grey,
+                              size: 18,
+                            ),
+                    ),
+                    hintText: "Password",
+                    hintStyle: GoogleFonts.josefinSans(
+                      color: Colors.grey[800],
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent)),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent)),
+                  ),
+                ),
+              ),
+            ),
+          ),
           TextField_Custom(
-              text: "Password", controller: password, width: double.infinity),
+              text: "Confirm Password",
+              controller: cpcontroller,
+              width: double.infinity),
+          SizedBox(
+            height: 30,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Row(
+              children: [
+                AnimatedContainer(
+                  duration: Duration(milliseconds: 500),
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                      color: _isPasswordEightCharacters
+                          ? Colors.green
+                          : Colors.transparent,
+                      border: _isPasswordEightCharacters
+                          ? Border.all(color: Colors.transparent)
+                          : Border.all(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Center(
+                    child: Icon(
+                      Icons.verified,
+                      color: Colors.white,
+                      size: 15,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Password have 8 characters",
+                    style: GoogleFonts.nunito(
+                        color: _isPasswordEightCharacters
+                            ? Colors.black
+                            : Colors.transparent))
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Row(
+              children: [
+                AnimatedContainer(
+                  duration: Duration(milliseconds: 500),
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                      color: _hasPasswordOneNumber
+                          ? Colors.green
+                          : Colors.transparent,
+                      border: _hasPasswordOneNumber
+                          ? Border.all(color: Colors.transparent)
+                          : Border.all(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Center(
+                    child: Icon(
+                      Icons.verified,
+                      color: Colors.white,
+                      size: 15,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Password atleast have 1 number",
+                  style: GoogleFonts.nunito(
+                      color: _hasPasswordOneNumber
+                          ? Colors.black
+                          : Colors.transparent),
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Row(
+              children: [
+                AnimatedContainer(
+                  duration: Duration(milliseconds: 500),
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                      color: _hasPasswordOneSplCh
+                          ? Colors.green
+                          : Colors.transparent,
+                      border: _hasPasswordOneSplCh
+                          ? Border.all(color: Colors.transparent)
+                          : Border.all(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Center(
+                    child: Icon(
+                      Icons.verified,
+                      color: Colors.white,
+                      size: 15,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Password atleast have 1 special character",
+                  style: GoogleFonts.nunito(
+                      color: _hasPasswordOneSplCh
+                          ? Colors.black
+                          : Colors.transparent),
+                )
+              ],
+            ),
+          ),
           Spacer(),
           Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 10),
@@ -43,11 +212,24 @@ class _Password_SignupState extends State<Password_Signup> {
                   setState(() {
                     isloading = true;
                   });
-                  if (password.text.isNotEmpty) {
+                  print(widget.email.text);
+                  print(password.text);
+                  print(cpcontroller.text);
+                  if (widget.email.text.isNotEmpty &&
+                      password.text == cpcontroller.text) {
+                    signup_email();
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: Colors.grey[400],
+                        content: Helper.text(
+                            "Verification mail was sent,Check your inbox",
+                            15,
+                            0,
+                            Colors.black,
+                            FontWeight.normal)));
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        backgroundColor: Colors.grey,
-                        content: Helper.text("Enter valid details", 20, 0,
+                        backgroundColor: Colors.grey[400],
+                        content: Helper.text("Provide correct password", 15, 0,
                             Colors.black, FontWeight.normal)));
                   }
                 },

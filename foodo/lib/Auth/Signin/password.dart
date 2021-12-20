@@ -8,7 +8,6 @@ import 'package:foodo/Main/home_view.dart';
 import 'package:foodo/constants/button.dart';
 import 'package:foodo/constants/text.dart';
 
-import '../Signup.dart';
 import '../widgets/footer.dart';
 
 class Password extends StatefulWidget {

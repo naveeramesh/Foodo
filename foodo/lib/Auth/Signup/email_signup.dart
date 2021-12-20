@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodo/Auth/Signup/password_signup.dart';
 import 'package:foodo/Auth/widgets/header.dart';
 import 'package:foodo/Auth/Signin/password.dart';
 import 'package:foodo/Auth/widgets/textfield.dart';
@@ -32,9 +33,10 @@ class _Signup_EmailState extends State<Signup_Email> {
               : Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (b) => Password(
-                            emailcontroller: emailcontroller,
-                          )));
+                      builder: (b) => Password_Signup(
+                            email: emailcontroller,
+                          ))
+                      );
         },
       ),
       backgroundColor: Colors.white,

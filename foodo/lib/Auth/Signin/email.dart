@@ -35,8 +35,8 @@ class _Signin_NewState extends State<Signin_New> {
               : Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (b) => Password_Signup(
-                            email: emailcontroller,
+                      builder: (b) => Password(
+                            emailcontroller: emailcontroller,
                           )));
         },
       ),

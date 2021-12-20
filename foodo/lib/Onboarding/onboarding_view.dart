@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:foodo/Auth/Signin.dart';
-import 'package:foodo/Auth/Signup.dart';
 import 'package:foodo/Onboarding/startscreen.dart';
 import 'package:foodo/Onboarding/widgets/data.dart';
 import 'package:foodo/Onboarding/widgets/pageview.dart';
