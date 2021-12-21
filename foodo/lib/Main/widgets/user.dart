@@ -38,39 +38,41 @@ class _UserHeaderState extends State<UserHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120,
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
-          children: [
-            Icon(
-              Icons.location_on,
-              color: Colors.red[800],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Helper.text("${name}", 22, 0, Colors.black, FontWeight.bold),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Helper.text(
-                        "${address}", 10, 0, Colors.grey, FontWeight.normal),
-                  )
-                ],
-              ),
-            ),
-            Spacer(),
-            IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.shopping_cart,
-                  color: Colors.red[800],
-                ))
-          ],
-        ),
+      child: Row(
+        children: [
+          Icon(
+            Icons.location_on,
+            color: Colors.red[800],
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Helper.text("${name}", 22, 0, Colors.black, FontWeight.bold),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Helper.text(
+                    "${address}", 10, 0, Colors.grey, FontWeight.normal),
+              )
+            ],
+          ),
+          Spacer(),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.search,
+                color: Colors.grey[400],
+              )),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.shopping_cart,
+                color: Colors.red[800],
+              ))
+        ],
       ),
     );
   }

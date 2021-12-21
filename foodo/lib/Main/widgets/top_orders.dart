@@ -24,9 +24,9 @@ class _TopOrdersState extends State<TopOrders> {
                 padding: const EdgeInsets.only(
                     left: 20.0, right: 20, top: 0, bottom: 20),
                 child: Container(
-                  height: MediaQuery.of(context).size.height / 9,
+                  height: MediaQuery.of(context).size.height / 8,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Row(
