@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:foodo/Main/widgets/details.dart';
 import 'package:foodo/constants/text.dart';
 
 class TopOrders extends StatefulWidget {
@@ -23,79 +24,93 @@ class _TopOrdersState extends State<TopOrders> {
               return Padding(
                 padding: const EdgeInsets.only(
                     left: 20.0, right: 20, top: 0, bottom: 20),
-                child: Container(
-                  height: MediaQuery.of(context).size.height / 8,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: MediaQuery.of(context).size.height / 10,
-                          width: 100,
-                          decoration: BoxDecoration(
-                              color: Colors.grey[800],
-                              borderRadius: BorderRadius.circular(6),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      snapshot.data!.docs[index]['image']),
-                                  fit: BoxFit.cover)),
-                        ),
+                child: Hero(
+                  tag: "Viewdetails",
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (b) =>
+                                  Detail_Screen(querySnapshot: snapshot)));
+                    },
+                    child: Container(
+                      height: MediaQuery.of(context).size.height / 8,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(6),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(
-                              top: 12.0,
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 10,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[800],
+                                  borderRadius: BorderRadius.circular(6),
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                          snapshot.data!.docs[index]['image']),
+                                      fit: BoxFit.cover)),
                             ),
-                            child: Helper.text(
-                                "${snapshot.data!.docs[index]['name']}",
-                                15,
-                                0,
-                                Colors.black,
-                                FontWeight.w600),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 7.0, bottom: 7),
-                            child: Helper.text(
-                                "${snapshot.data!.docs[index]['ingredienttype']}",
-                                12,
-                                0,
-                                Colors.grey,
-                                FontWeight.w600),
-                          ),
-                          Row(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(
-                                Icons.star,
-                                color: Colors.yellow[700],
-                                size: 19,
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 12.0,
+                                ),
+                                child: Helper.text(
+                                    "${snapshot.data!.docs[index]['name']}",
+                                    15,
+                                    0,
+                                    Colors.black,
+                                    FontWeight.w600),
                               ),
-                              Helper.text(
-                                  "${snapshot.data!.docs[index]['rating']}",
-                                  12,
-                                  0,
-                                  Colors.black,
-                                  FontWeight.w600),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 7.0, bottom: 7),
+                                child: Helper.text(
+                                    "${snapshot.data!.docs[index]['ingredienttype']}",
+                                    12,
+                                    0,
+                                    Colors.grey,
+                                    FontWeight.w600),
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.yellow[700],
+                                    size: 19,
+                                  ),
+                                  Helper.text(
+                                      "${snapshot.data!.docs[index]['rating']}",
+                                      12,
+                                      0,
+                                      Colors.black,
+                                      FontWeight.w600),
+                                ],
+                              ),
                             ],
                           ),
+                          Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 12.0),
+                            child: Helper.text(
+                                "₹ " +
+                                    "${snapshot.data!.docs[index]['amount']}",
+                                12,
+                                0,
+                                Colors.red[800],
+                                FontWeight.w600),
+                          )
                         ],
                       ),
-                      Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 12.0),
-                        child: Helper.text(
-                            "₹ " + "${snapshot.data!.docs[index]['amount']}",
-                            12,
-                            0,
-                            Colors.red[800],
-                            FontWeight.w600),
-                      )
-                    ],
+                    ),
                   ),
                 ),
               );
