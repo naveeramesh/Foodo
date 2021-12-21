@@ -7,6 +7,7 @@ import 'package:foodo/Auth/location.dart';
 import 'package:foodo/Auth/userdetails.dart';
 import 'package:foodo/Main/home_view.dart';
 
+import 'Main/home.dart';
 import 'Onboarding/onboarding_view.dart';
 
 void main() async {
@@ -50,9 +51,9 @@ class _SplashScreenState extends State<SplashScreen> {
             context,
             MaterialPageRoute(
                 builder: (b) =>
-                //  _auth.currentUser?.uid == null
-                //     ? Onboarding()
-                     HomeScreen())));
+                     _auth.currentUser?.uid == null
+                        ? Onboarding()
+                    :HomeScreen())));
     super.initState();
   }
 
