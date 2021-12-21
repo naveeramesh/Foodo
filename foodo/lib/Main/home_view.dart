@@ -41,14 +41,29 @@ class _HomeScreenState extends State<HomeScreen> {
           Category(),
           Poster(),
           Padding(
-            padding: const EdgeInsets.only(top: 15.0, left: 20, bottom: 15),
+            padding: const EdgeInsets.only(left: 20, bottom: 15),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Helper.text("Top Orders", 18, 0, Colors.black, FontWeight.w600),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: Row(
+                    children: [
+                      Helper.text(
+                          "View more", 12, 0, Colors.red[800], FontWeight.w600),
+                      Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        color: Colors.red[800],
+                        size: 10,
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
-          TopOrders()
+          TopOrders(),
         ],
       ),
     );

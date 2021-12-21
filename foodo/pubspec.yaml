@@ -64,6 +64,7 @@ flutter:
     - assets/images/cook.png
     - assets/images/offer.png
     - assets/images/delivery.png
+    - assets/images/poster.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
