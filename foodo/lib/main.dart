@@ -49,9 +49,10 @@ class _SplashScreenState extends State<SplashScreen> {
         () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (b) => _auth.currentUser?.uid == null
-                    ? Onboarding()
-                    : HomeScreen())));
+                builder: (b) =>
+                //  _auth.currentUser?.uid == null
+                //     ? Onboarding()
+                     HomeScreen())));
     super.initState();
   }
 

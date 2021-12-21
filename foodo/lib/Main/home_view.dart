@@ -24,47 +24,62 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         title: UserHeader(),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0, bottom: 20),
-            child: CarosuelLider(),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5.0, left: 20, bottom: 15),
-            child: Row(
-              children: [
-                Helper.text("Categories", 18, 0, Colors.black, FontWeight.w600),
-              ],
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0, bottom: 20),
+              child: CarosuelLider(),
             ),
-          ),
-          Category(),
-          Poster(),
-          Padding(
-            padding: const EdgeInsets.only(left: 20, bottom: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Helper.text("Top Orders", 18, 0, Colors.black, FontWeight.w600),
-                Padding(
-                  padding: const EdgeInsets.only(right: 20.0),
-                  child: Row(
-                    children: [
-                      Helper.text(
-                          "View more", 12, 0, Colors.red[800], FontWeight.w600),
-                      Icon(
-                        Icons.arrow_forward_ios_outlined,
-                        color: Colors.red[800],
-                        size: 10,
-                      )
-                    ],
+            SingleChildScrollView(
+                child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 5.0, left: 20, bottom: 15),
+                    child: Row(
+                      children: [
+                        Helper.text(
+                            "Categories", 18, 0, Colors.black, FontWeight.w600),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          TopOrders(),
-        ],
+                  Category(),
+                  Poster(),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, bottom: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Helper.text(
+                            "Top Orders", 18, 0, Colors.black, FontWeight.w600),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20.0),
+                          child: Row(
+                            children: [
+                              Helper.text("View more", 12, 0, Colors.red[800],
+                                  FontWeight.w600),
+                              Icon(
+                                Icons.arrow_forward_ios_outlined,
+                                color: Colors.red[800],
+                                size: 10,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  TopOrders(),
+                ],
+              ),
+            ))
+          ],
+        ),
       ),
     );
   }

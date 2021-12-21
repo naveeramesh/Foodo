@@ -13,6 +13,8 @@ class Detail_Screen extends StatefulWidget {
 class _Detail_ScreenState extends State<Detail_Screen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: Colors.white,
+    );
   }
 }
