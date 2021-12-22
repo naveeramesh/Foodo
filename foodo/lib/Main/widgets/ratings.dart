@@ -20,18 +20,18 @@ class StarRating extends StatelessWidget {
   final int starCount = 5;
   final double rating;
   final Color? color;
-
-  const StarRating({Key? key, required this.rating, required this.color})
+  final double size;
+  const StarRating({Key? key, required this.rating, required this.color,required this.size})
       : super(key: key);
 
   Widget buildStar(BuildContext context, int index) {
     Icon icon;
     if (index >= rating) {
-      icon = new Icon(Icons.star_border, color: color);
+      icon = new Icon(Icons.star_border, color: color,size: size,);
     } else if (index > rating - 1 && index < rating) {
-      icon = new Icon(Icons.star_half, color: color);
+      icon = new Icon(Icons.star_half, color: color,size: size,);
     } else {
-      icon = new Icon(Icons.star, color: color);
+      icon = new Icon(Icons.star, color: color,size: size,);
     }
     return icon;
   }
