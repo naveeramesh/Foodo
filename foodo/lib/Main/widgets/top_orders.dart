@@ -15,11 +15,14 @@ class _TopOrdersState extends State<TopOrders> {
   Widget build(BuildContext context) {
     return Expanded(
       child: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection("TopOrders").snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection("TopOrders")
+            .where("toporder", isEqualTo: "s")
+            .snapshots(),
         builder: (context, snapshot) {
           return ListView.builder(
             scrollDirection: Axis.vertical,
-            itemCount: 3,
+            itemCount: 2,
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.only(

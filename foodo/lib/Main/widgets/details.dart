@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:foodo/Main/widgets/ratings.dart';
+import 'package:foodo/constants/button.dart';
 import 'package:foodo/constants/text.dart';
 
 class Detail_Screen extends StatefulWidget {
@@ -14,8 +15,24 @@ class Detail_Screen extends StatefulWidget {
 
 class _Detail_ScreenState extends State<Detail_Screen> {
   int? quantity = 1;
+  var images = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    widget.querySnapshot['ingredients'].forEach((element) {
+      print(element);
+      images.add(element);
+      print(images);
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // var names = ["Hello", "World"];
+    // // widget.querySnapshot['ingredients'];
+
+    // // List<Widget> cards = names.map((name) => Cards(unit: name));
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -74,26 +91,25 @@ class _Detail_ScreenState extends State<Detail_Screen> {
                   child: Helper.text("${widget.querySnapshot['rating']}", 18, 0,
                       Colors.grey[600], FontWeight.bold, TextAlign.start),
                 ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20, right: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Helper.text("${widget.querySnapshot['name']}", 25, 0,
-                    Colors.black, FontWeight.bold, TextAlign.start),
+                Spacer(),
                 Container(
                   height: 30,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: Colors.grey[100],
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Row(
                     children: [
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              if (quantity == 1) {
+                                quantity = quantity!;
+                              } else {
+                                quantity = (quantity! - 1);
+                              }
+                            });
+                          },
                           icon: Icon(
                             Icons.remove,
                             size: 15,
@@ -101,7 +117,11 @@ class _Detail_ScreenState extends State<Detail_Screen> {
                       Helper.text(quantity.toString(), 15, 0, Colors.black,
                           FontWeight.bold, TextAlign.start),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              quantity = (quantity! + 1);
+                            });
+                          },
                           icon: Icon(
                             Icons.add,
                             size: 15,
@@ -113,12 +133,46 @@ class _Detail_ScreenState extends State<Detail_Screen> {
             ),
           ),
           Padding(
+            padding: const EdgeInsets.only(left: 20, right: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Helper.text("${widget.querySnapshot['name']}", 25, 0,
+                    Colors.black, FontWeight.bold, TextAlign.start),
+              ],
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.only(left: 20.0, top: 8),
             child: Row(
               children: [
                 Helper.text("${widget.querySnapshot['ingredienttype']}", 14, 0,
                     Colors.grey, FontWeight.bold, TextAlign.start),
               ],
+            ),
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0, top: 20, bottom: 10),
+                child: Helper.text("Ingredients", 18, 0, Colors.black,
+                    FontWeight.bold, TextAlign.start),
+              ),
+            ],
+          ),
+          Container(
+            height: 100,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: images.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  height: 30,
+                  width: 40,
+                  color: Colors.red,
+                  child: Image.network(images[index]),
+                );
+              },
             ),
           ),
           Row(
@@ -140,6 +194,11 @@ class _Detail_ScreenState extends State<Detail_Screen> {
             ),
           ),
           Spacer(),
+          GestureDetector(
+            onTap: () {},
+            child: Buttons.Button(Colors.grey[300], 10, 50, double.infinity,
+                "₹ " + "${widget.querySnapshot['amount']}", Colors.black),
+          )
         ],
       ),
     );
