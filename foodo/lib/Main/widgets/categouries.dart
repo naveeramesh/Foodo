@@ -44,7 +44,7 @@ class _CategoryState extends State<Category> {
                           12,
                           0,
                           Colors.white,
-                          FontWeight.w600))
+                          FontWeight.w600,TextAlign.center))
                 ]);
               },
             );

@@ -225,12 +225,18 @@ class _Password_SignupState extends State<Password_Signup> {
                             15,
                             0,
                             Colors.black,
-                            FontWeight.normal)));
+                            FontWeight.normal,
+                            TextAlign.center)));
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         backgroundColor: Colors.grey[400],
-                        content: Helper.text("Provide correct password", 15, 0,
-                            Colors.black, FontWeight.normal)));
+                        content: Helper.text(
+                            "Provide correct password",
+                            15,
+                            0,
+                            Colors.black,
+                            FontWeight.normal,
+                            TextAlign.center)));
                   }
                 },
                 child: Container(
@@ -243,8 +249,8 @@ class _Password_SignupState extends State<Password_Signup> {
                       child: isloading
                           ? CircularProgressIndicator(
                               strokeWidth: 2, color: Colors.white)
-                          : Helper.text(
-                              "Signup", 20, 0, Colors.white, FontWeight.bold)),
+                          : Helper.text("Signup", 20, 0, Colors.white,
+                              FontWeight.bold, TextAlign.center)),
                 )),
           ),
         ],
@@ -268,8 +274,8 @@ class _Password_SignupState extends State<Password_Signup> {
     }).catchError((e) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Helper.text(
-              e.toString(), 20, 0, Colors.black, FontWeight.normal)));
+          content: Helper.text(e.toString(), 20, 0, Colors.black,
+              FontWeight.normal, TextAlign.center)));
     });
     if (currentuser != null) {
       Navigator.pushReplacement(

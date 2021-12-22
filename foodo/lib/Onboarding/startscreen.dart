@@ -25,16 +25,16 @@ class _StartScreenState extends State<StartScreen> {
           Spacer(),
           Center(
               child: Helper.text(
-                  "Foodo", 35, 0, Colors.red[800], FontWeight.bold)),
+                  "Foodo", 35, 0, Colors.red[800], FontWeight.bold,TextAlign.center)),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(
                 child: Helper.text("Create an account,to satisfy your hunger",
-                    20, 0, Colors.grey, FontWeight.bold)),
+                    20, 0, Colors.grey, FontWeight.bold,TextAlign.center)),
           ),
           Center(
               child: Helper.text(
-                  "with Foodo", 20, 0, Colors.grey, FontWeight.bold)),
+                  "with Foodo", 20, 0, Colors.grey, FontWeight.bold,TextAlign.center)),
           SizedBox(
             height: 50,
           ),
@@ -47,7 +47,7 @@ class _StartScreenState extends State<StartScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         backgroundColor: Colors.grey[400],
                         content: Helper.text("Signin to order food", 15, 0,
-                            Colors.black, FontWeight.normal)));
+                            Colors.black, FontWeight.normal,TextAlign.center)));
                   } else {
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (b) => Userdetails()));
@@ -79,7 +79,7 @@ class _StartScreenState extends State<StartScreen> {
                     15,
                     0,
                     Colors.grey,
-                    FontWeight.bold)),
+                    FontWeight.bold,TextAlign.center)),
           )
         ],
       ),

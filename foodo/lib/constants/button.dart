@@ -10,7 +10,7 @@ class Buttons {
       decoration: BoxDecoration(
           color: color, borderRadius: BorderRadius.circular(radius)),
       child: Center(
-          child: Helper.text(text, 20, 0, color_text, FontWeight.bold)),
+          child: Helper.text(text, 20, 0, color_text, FontWeight.bold,TextAlign.center)),
     );
   }
 }

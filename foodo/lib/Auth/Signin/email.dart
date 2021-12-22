@@ -31,7 +31,7 @@ class _Signin_NewState extends State<Signin_New> {
               ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   backgroundColor: Colors.grey[400],
                   content: Helper.text("Enter your mail id to register", 20, 0,
-                      Colors.black, FontWeight.normal)))
+                      Colors.black, FontWeight.normal,TextAlign.center)))
               : Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(

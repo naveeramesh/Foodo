@@ -29,7 +29,7 @@ class _Signup_EmailState extends State<Signup_Email> {
               ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   backgroundColor: Colors.grey[400],
                   content: Helper.text("Enter your mail id to continue", 20, 0,
-                      Colors.black, FontWeight.normal)))
+                      Colors.black, FontWeight.normal,TextAlign.center)))
               : Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(

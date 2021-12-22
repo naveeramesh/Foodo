@@ -34,7 +34,7 @@ class _GenderState extends State<Gender> {
             hint: Padding(
                 padding: const EdgeInsets.only(left: 10.0),
                 child: Helper.text(
-                    "Gender", 16, 0, Colors.grey[800], FontWeight.normal)),
+                    "Gender", 16, 0, Colors.grey[800], FontWeight.normal,TextAlign.center)),
             isExpanded: true,
             onChanged: (newValue) {
               setState(() {
@@ -53,7 +53,7 @@ class _GenderState extends State<Gender> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Helper.text(
-                        e, 16, 0, Colors.grey[800], FontWeight.normal),
+                        e, 16, 0, Colors.grey[800], FontWeight.normal,TextAlign.center),
                   ));
             }).toList(),
           ),

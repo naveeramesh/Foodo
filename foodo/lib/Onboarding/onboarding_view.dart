@@ -47,7 +47,7 @@ class _OnboardingState extends State<Onboarding> {
                             MaterialPageRoute(builder: (b) => StartScreen()));
                       },
                       child: Helper.text(
-                          "Skip", 15, 0, Colors.black, FontWeight.bold))
+                          "Skip", 15, 0, Colors.black, FontWeight.bold,TextAlign.center))
                 ],
               ),
             ),
@@ -92,7 +92,7 @@ class _OnboardingState extends State<Onboarding> {
                         ),
                         child: Center(
                             child: Helper.text("Coninue", 20, 0, Colors.white,
-                                FontWeight.bold)),
+                                FontWeight.bold,TextAlign.center)),
                       ),
                     ),
                   ),

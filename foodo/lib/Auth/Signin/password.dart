@@ -47,7 +47,7 @@ class _PasswordState extends State<Password> {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         backgroundColor: Colors.grey,
                         content: Helper.text("Enter valid details", 20, 0,
-                            Colors.black, FontWeight.normal)));
+                            Colors.black, FontWeight.normal,TextAlign.center)));
                   }
                 },
                 child: Container(
@@ -61,7 +61,7 @@ class _PasswordState extends State<Password> {
                           ? CircularProgressIndicator(
                               strokeWidth: 2, color: Colors.white)
                           : Helper.text(
-                              "Signin", 20, 0, Colors.white, FontWeight.bold)),
+                              "Signin", 20, 0, Colors.white, FontWeight.bold,TextAlign.center)),
                 )),
           ),
           GestureDetector(
@@ -91,7 +91,7 @@ class _PasswordState extends State<Password> {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Helper.text(
-              e.toString(), 20, 0, Colors.black, FontWeight.normal)));
+              e.toString(), 20, 0, Colors.black, FontWeight.normal,TextAlign.center)));
     });
     if (currentUser != null) {
       get_data(_auth.currentUser!.uid);

@@ -26,13 +26,16 @@ class _HomeScreenState extends State<HomeScreen> {
           height: MediaQuery.of(context).size.height,
           child: Column(
             children: [
-              CarosuelLider(),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+                child: CarosuelLider(),
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 5.0, left: 20, bottom: 15),
                 child: Row(
                   children: [
                     Helper.text(
-                        "Categories", 18, 0, Colors.black, FontWeight.w600),
+                        "Categories", 18, 0, Colors.black, FontWeight.w600,TextAlign.center),
                   ],
                 ),
               ),
@@ -44,13 +47,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Helper.text(
-                        "Top Orders", 18, 0, Colors.black, FontWeight.w600),
+                        "Top Orders", 18, 0, Colors.black, FontWeight.w600,TextAlign.center),
                     Padding(
                       padding: const EdgeInsets.only(right: 20.0),
                       child: Row(
                         children: [
                           Helper.text("View more", 12, 0, Colors.red[800],
-                              FontWeight.w600),
+                              FontWeight.w600,TextAlign.center),
                           Icon(
                             Icons.arrow_forward_ios_outlined,
                             color: Colors.red[800],

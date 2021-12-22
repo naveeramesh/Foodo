@@ -51,11 +51,11 @@ class _UserHeaderState extends State<UserHeader> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Helper.text("${name}", 22, 0, Colors.black, FontWeight.bold),
+              Helper.text("${name}", 22, 0, Colors.black, FontWeight.bold,TextAlign.center),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Helper.text(
-                    "${address}", 10, 0, Colors.grey, FontWeight.normal),
+                    "${address}", 10, 0, Colors.grey, FontWeight.normal,TextAlign.center),
               )
             ],
           ),

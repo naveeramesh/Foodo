@@ -38,14 +38,14 @@ class _UserdetailsState extends State<Userdetails> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Helper.text("Update your details ", 18, 0, Colors.grey[800],
-                      FontWeight.w600),
+                      FontWeight.w600,TextAlign.center),
                 ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0, left: 2),
               child: Helper.text(
-                  "One step ahead", 15, 0, Colors.grey[400], FontWeight.normal),
+                  "One step ahead", 15, 0, Colors.grey[400], FontWeight.normal,TextAlign.center),
             ),
           ],
         ),
@@ -118,7 +118,7 @@ class _UserdetailsState extends State<Userdetails> {
                           ? CircularProgressIndicator(
                               strokeWidth: 2, color: Colors.white)
                           : Helper.text(
-                              "Update", 20, 0, Colors.white, FontWeight.bold)),
+                              "Update", 20, 0, Colors.white, FontWeight.bold,TextAlign.center)),
                 )),
           )
         ],

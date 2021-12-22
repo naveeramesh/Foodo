@@ -44,7 +44,7 @@ class _HeaderState extends State<Header> {
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, top: 20),
                 child: Helper.text(
-                    widget.text, 30, 0, Colors.black, FontWeight.w600),
+                    widget.text, 30, 0, Colors.black, FontWeight.w600,TextAlign.center),
               ),
             ],
           ),
