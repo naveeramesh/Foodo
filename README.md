@@ -9,7 +9,7 @@
 
 This project is based on Flutter tech stack used to build mobile application,It's an end to end application.From Authentication to Checkout with minimalistic clean and neat UI with Firebase backend support.
 
-## 🏃‍♂️ Local Installation
+## ℹ️ Local Installation
 
 1. Drop a ⭐ on the Github Repository. 
 2. Fork the repository 
@@ -19,4 +19,10 @@ This project is based on Flutter tech stack used to build mobile application,It'
 ```sh
 https://github.com/naveeramesh/Foodo.git
 ```
+## 🏃‍♀️How to run
+
+```sh
+flutter pub get
+flutter run
+``` 
 
