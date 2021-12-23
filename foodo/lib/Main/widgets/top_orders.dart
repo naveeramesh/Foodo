@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:foodo/Main/widgets/details.dart';
+import 'package:foodo/Main/details.dart';
 import 'package:foodo/constants/text.dart';
 
 class TopOrders extends StatefulWidget {
