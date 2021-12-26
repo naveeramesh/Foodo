@@ -21,6 +21,8 @@ https://github.com/naveeramesh/Foodo.git
 ```
 ## 🏃‍♀️How to run
 
+
+
 ```sh
 flutter pub get
 flutter run
