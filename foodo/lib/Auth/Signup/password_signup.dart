@@ -28,6 +28,7 @@ class _Password_SignupState extends State<Password_Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Column(
         children: [
@@ -278,6 +279,7 @@ class _Password_SignupState extends State<Password_Signup> {
               FontWeight.normal, TextAlign.center)));
     });
     if (currentuser != null) {
+     
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (b) => Userdetails()));
     }

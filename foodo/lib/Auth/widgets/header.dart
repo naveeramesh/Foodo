@@ -17,7 +17,7 @@ class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 220,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -43,8 +43,8 @@ class _HeaderState extends State<Header> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, top: 20),
-                child: Helper.text(
-                    widget.text, 30, 0, Colors.black, FontWeight.w600,TextAlign.center),
+                child: Helper.text(widget.text, 30, 0, Colors.black,
+                    FontWeight.w600, TextAlign.center),
               ),
             ],
           ),
@@ -53,7 +53,7 @@ class _HeaderState extends State<Header> {
             child: Container(
                 constraints: BoxConstraints(maxWidth: 350),
                 child: Text(
-                 widget.subtext,
+                  widget.subtext,
                   textAlign: TextAlign.start,
                   style: GoogleFonts.josefinSans(
                       fontWeight: FontWeight.bold,

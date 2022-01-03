@@ -46,8 +46,13 @@ class _PasswordState extends State<Password> {
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         backgroundColor: Colors.grey,
-                        content: Helper.text("Enter valid details", 20, 0,
-                            Colors.black, FontWeight.normal,TextAlign.center)));
+                        content: Helper.text(
+                            "Enter valid details",
+                            20,
+                            0,
+                            Colors.black,
+                            FontWeight.normal,
+                            TextAlign.center)));
                   }
                 },
                 child: Container(
@@ -60,8 +65,8 @@ class _PasswordState extends State<Password> {
                       child: isloading
                           ? CircularProgressIndicator(
                               strokeWidth: 2, color: Colors.white)
-                          : Helper.text(
-                              "Signin", 20, 0, Colors.white, FontWeight.bold,TextAlign.center)),
+                          : Helper.text("Signin", 20, 0, Colors.white,
+                              FontWeight.bold, TextAlign.center)),
                 )),
           ),
           GestureDetector(
@@ -90,8 +95,8 @@ class _PasswordState extends State<Password> {
     }).catchError((e) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Helper.text(
-              e.toString(), 20, 0, Colors.black, FontWeight.normal,TextAlign.center)));
+          content: Helper.text(e.toString(), 20, 0, Colors.black,
+              FontWeight.normal, TextAlign.center)));
     });
     if (currentUser != null) {
       get_data(_auth.currentUser!.uid);
@@ -106,6 +111,7 @@ class _PasswordState extends State<Password> {
         .doc(uid)
         .get()
         .whenComplete(() {
+      
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (b) => HomeScreen()));
     });

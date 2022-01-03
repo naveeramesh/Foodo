@@ -39,7 +39,8 @@ class _LocationState extends State<Location> {
           child: Lottie.network(
               "https://assets1.lottiefiles.com/temp/lf20_EVDaJ0.json"),
         )),
-        Helper.text("Fetching Location", 20, 0, Colors.black, FontWeight.bold,TextAlign.center)
+        Helper.text("Fetching Location", 20, 0, Colors.black, FontWeight.bold,TextAlign.center),
+       
       ],
     ));
   }

@@ -15,6 +15,7 @@ class Detail_Screen extends StatefulWidget {
 
 class _Detail_ScreenState extends State<Detail_Screen> {
   FirebaseAuth _auth = FirebaseAuth.instance;
+  bool isloading = false;
   int? quantity = 1;
   var images = [];
   @override
@@ -41,7 +42,9 @@ class _Detail_ScreenState extends State<Detail_Screen> {
             color: Colors.black,
             size: 18,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         actions: [
           IconButton(
@@ -223,7 +226,12 @@ class _Detail_ScreenState extends State<Detail_Screen> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20.0),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            setState(() {
+                              isloading = true;
+                            });
+                            addcart();
+                          },
                           child: Container(
                             height: 50,
                             decoration: BoxDecoration(
@@ -231,14 +239,16 @@ class _Detail_ScreenState extends State<Detail_Screen> {
                               color: Colors.red[800],
                             ),
                             child: Center(
-                              child: Helper.text(
-                                  "Add to Cart",
-                                  20,
-                                  0,
-                                  Colors.white,
-                                  FontWeight.bold,
-                                  TextAlign.center),
-                            ),
+                                child: isloading
+                                    ? CircularProgressIndicator(
+                                        color: Colors.white)
+                                    : Helper.text(
+                                        "Add to Cart",
+                                        20,
+                                        0,
+                                        Colors.white,
+                                        FontWeight.bold,
+                                        TextAlign.center)),
                           ),
                         ),
                       ),
@@ -257,11 +267,20 @@ class _Detail_ScreenState extends State<Detail_Screen> {
     FirebaseFirestore.instance
         .collection("Userinfo")
         .doc(_auth.currentUser!.uid)
-        .collection("Cart").doc(widget.querySnapshot['name'])
+        .collection("Cart")
+        .doc(widget.querySnapshot['name'])
         .set({
-          "Pd name": widget.querySnapshot['name'],
-          "amount":quantity!*widget.querySnapshot['amount'],
-          "image":widget.querySnapshot['image']
-        });
+      "Pd name": widget.querySnapshot['name'],
+      "amount": quantity! * widget.querySnapshot['amount'],
+      "image": widget.querySnapshot['image']
+    }).whenComplete(() {
+      setState(() {
+        isloading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.grey[400],
+          content: Helper.text("Items added to Cart", 15, 0, Colors.black,
+              FontWeight.normal, TextAlign.center)));
+    });
   }
 }
