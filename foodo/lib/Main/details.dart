@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodo/Main/widgets/ratings.dart';
 import 'package:foodo/constants/button.dart';
@@ -16,6 +17,7 @@ class Detail_Screen extends StatefulWidget {
 }
 
 class _Detail_ScreenState extends State<Detail_Screen> {
+  FirebaseAuth _auth = FirebaseAuth.instance;
   int? quantity = 1;
   var images = [];
   @override
@@ -223,20 +225,23 @@ class _Detail_ScreenState extends State<Detail_Screen> {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20.0),
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.red[800],
-                          ),
-                          child: Center(
-                            child: Helper.text(
-                                "Add to Cart",
-                                20,
-                                0,
-                                Colors.white,
-                                FontWeight.bold,
-                                TextAlign.center),
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.red[800],
+                            ),
+                            child: Center(
+                              child: Helper.text(
+                                  "Add to Cart",
+                                  20,
+                                  0,
+                                  Colors.white,
+                                  FontWeight.bold,
+                                  TextAlign.center),
+                            ),
                           ),
                         ),
                       ),
@@ -249,5 +254,17 @@ class _Detail_ScreenState extends State<Detail_Screen> {
         ),
       ),
     );
+  }
+
+  void addcart() {
+    FirebaseFirestore.instance
+        .collection("Userinfo")
+        .doc(_auth.currentUser!.uid)
+        .collection("Cart").doc(widget.querySnapshot['name'])
+        .set({
+          "Pd name": widget.querySnapshot['name'],
+          "amount":quantity!*widget.querySnapshot['amount'],
+          "image":widget.querySnapshot['image']
+        });
   }
 }
