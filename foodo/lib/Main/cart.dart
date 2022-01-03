@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodo/Main/widgets/bottomsheet.dart';
 import 'package:foodo/constants/text.dart';
 
 class Cart extends StatefulWidget {
@@ -99,9 +100,7 @@ class _CartState extends State<Cart> {
                                           children: [
                                             Helper.text(
                                                 "₹ " +
-                                                    snapshot.data!
-                                                        .docs[index]['amount']
-                                                        .toString(),
+                                                    "${snapshot.data!.docs[index]['amount'] * snapshot.data!.docs[index]['quantity']}",
                                                 13,
                                                 0,
                                                 Colors.black,
@@ -130,8 +129,25 @@ class _CartState extends State<Cart> {
                                                       FontWeight.bold,
                                                       TextAlign.center),
                                                   GestureDetector(
-                                                    onTap: (){
-                                                      
+                                                    onTap: () {
+                                                      print(index);
+                                                      showModalBottomSheet(
+                                                          context: context,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius.vertical(
+                                                                    top: Radius
+                                                                        .circular(
+                                                                            25.0)),
+                                                          ),
+                                                          builder: (context) =>
+                                                              modelSheet(
+                                                                name: snapshot
+                                                                        .data!
+                                                                        .docs[index]
+                                                                    ['Pd name'],
+                                                              ));
                                                     },
                                                     child: Icon(
                                                       Icons
