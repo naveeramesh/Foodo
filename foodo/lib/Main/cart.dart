@@ -88,14 +88,28 @@ class _CartState extends State<Cart> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Helper.text(
-                                            snapshot.data!.docs[index]
-                                                ['Pd name'],
-                                            15,
-                                            0,
-                                            Colors.black,
-                                            FontWeight.bold,
-                                            TextAlign.center),
+                                        Row(
+                                          children: [
+                                            Helper.text(
+                                                snapshot.data!.docs[index]
+                                                    ['Pd name'],
+                                                15,
+                                                0,
+                                                Colors.black,
+                                                FontWeight.bold,
+                                                TextAlign.center),
+                                            Helper.text(
+                                                "  ₹ " +
+                                                    snapshot.data!
+                                                        .docs[index]['amount']
+                                                        .toString(),
+                                                13,
+                                                0,
+                                                Colors.grey,
+                                                FontWeight.bold,
+                                                TextAlign.start)
+                                          ],
+                                        ),
                                         Row(
                                           children: [
                                             Helper.text(
@@ -170,8 +184,19 @@ class _CartState extends State<Cart> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Helper.text("Delete", 10, 0, Colors.red[800],
-                                    FontWeight.bold, TextAlign.center),
+                                GestureDetector(
+                                  onTap: () {
+                                    delete(
+                                        snapshot.data!.docs[index]['Pd name']);
+                                  },
+                                  child: Helper.text(
+                                      "Delete",
+                                      10,
+                                      0,
+                                      Colors.red[800],
+                                      FontWeight.bold,
+                                      TextAlign.center),
+                                ),
                               ],
                             ),
                           ),
@@ -186,5 +211,14 @@ class _CartState extends State<Cart> {
         ),
       ),
     );
+  }
+
+  void delete(String name) {
+    FirebaseFirestore.instance
+        .collection("Userinfo")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection("Cart")
+        .doc(name)
+        .delete();
   }
 }
