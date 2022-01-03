@@ -1,10 +1,7 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodo/Main/widgets/ratings.dart';
-import 'package:foodo/constants/button.dart';
 import 'package:foodo/constants/text.dart';
 
 class Detail_Screen extends StatefulWidget {
