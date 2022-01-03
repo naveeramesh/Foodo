@@ -111,7 +111,6 @@ class _PasswordState extends State<Password> {
         .doc(uid)
         .get()
         .whenComplete(() {
-      
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (b) => HomeScreen()));
     });

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodo/Main/cart.dart';
 import 'package:foodo/constants/text.dart';
 
 class UserHeader extends StatefulWidget {
@@ -51,11 +52,12 @@ class _UserHeaderState extends State<UserHeader> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Helper.text("${name}", 22, 0, Colors.black, FontWeight.bold,TextAlign.center),
+              Helper.text("${name}", 22, 0, Colors.black, FontWeight.bold,
+                  TextAlign.center),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
-                child: Helper.text(
-                    "${address}", 10, 0, Colors.grey, FontWeight.normal,TextAlign.center),
+                child: Helper.text("${address}", 10, 0, Colors.grey,
+                    FontWeight.normal, TextAlign.center),
               )
             ],
           ),
@@ -67,7 +69,10 @@ class _UserHeaderState extends State<UserHeader> {
                 color: Colors.grey[400],
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (b) => Cart()));
+              },
               icon: Icon(
                 Icons.shopping_cart,
                 color: Colors.red[800],

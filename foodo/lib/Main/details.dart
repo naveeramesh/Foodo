@@ -272,7 +272,8 @@ class _Detail_ScreenState extends State<Detail_Screen> {
         .set({
       "Pd name": widget.querySnapshot['name'],
       "amount": quantity! * widget.querySnapshot['amount'],
-      "image": widget.querySnapshot['image']
+      "image": widget.querySnapshot['image'],
+      "quantity":quantity
     }).whenComplete(() {
       setState(() {
         isloading = false;
