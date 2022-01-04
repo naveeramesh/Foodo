@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodo/Main/widgets/bottomsheet.dart';
+import 'package:foodo/constants/button.dart';
 import 'package:foodo/constants/text.dart';
 
 class Cart extends StatefulWidget {
@@ -12,15 +13,52 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
+  num? fullamount = 0;
+  @override
+  void initState() {
+    FirebaseFirestore.instance
+        .collection("Userinfo")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection("Cart")
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        setState(() {
+          fullamount = fullamount! + element.data()["amount"];
+        });
+        print(element.data()["amount"].toString());
+        print(fullamount);
+      });
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Helper.text("₹" + " ${fullamount}", 15, 0, Colors.black,
+                  FontWeight.bold, TextAlign.center),
+            ),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Buttons.Button(
+                  Colors.red[800], 10, 50, 150, "Confirm Order", Colors.white),
+            )
+          ],
+        ),
+      ),
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back_ios_new_outlined,
+            Icons.clear,
             color: Colors.black,
-            size: 18,
           ),
           onPressed: () {
             Navigator.pop(context);

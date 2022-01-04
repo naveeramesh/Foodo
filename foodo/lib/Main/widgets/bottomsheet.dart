@@ -56,7 +56,8 @@ class _modelSheetState extends State<modelSheet> {
                                 .doc(widget.name)
                                 .update({
                                 "quantity":
-                                    snapshot.data!.docs[0]['quantity'] - 1
+                                    snapshot.data!.docs[0]['quantity'] - 1,
+                              
                               });
                       },
                       child: Container(
@@ -86,7 +87,6 @@ class _modelSheetState extends State<modelSheet> {
                             .doc(widget.name)
                             .update({
                           "quantity": snapshot.data!.docs[0]['quantity'] + 1,
-                       
                         });
                       },
                       child: Container(
