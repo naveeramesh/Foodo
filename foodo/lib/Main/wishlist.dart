@@ -180,7 +180,7 @@ class _WishListState extends State<WishList> {
     FirebaseFirestore.instance
         .collection("Userinfo")
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection("Wishlist")
+        .collection("WishList")
         .doc(name)
         .delete();
   }

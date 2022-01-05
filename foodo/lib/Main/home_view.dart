@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodo/Main/Viewfood.dart';
 import 'package:foodo/Main/widgets/categouries.dart';
 import 'package:foodo/Main/widgets/poster.dart';
 import 'package:foodo/Main/widgets/top_orders.dart';
@@ -34,8 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.only(top: 5.0, left: 20, bottom: 15),
                 child: Row(
                   children: [
-                    Helper.text(
-                        "Categories", 18, 0, Colors.black, FontWeight.w600,TextAlign.center),
+                    Helper.text("Categories", 18, 0, Colors.black,
+                        FontWeight.w600, TextAlign.center),
                   ],
                 ),
               ),
@@ -46,20 +47,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Helper.text(
-                        "Top Orders", 18, 0, Colors.black, FontWeight.w600,TextAlign.center),
+                    Helper.text("Top Orders", 18, 0, Colors.black,
+                        FontWeight.w600, TextAlign.center),
                     Padding(
                       padding: const EdgeInsets.only(right: 20.0),
-                      child: Row(
-                        children: [
-                          Helper.text("View more", 12, 0, Colors.red[800],
-                              FontWeight.w600,TextAlign.center),
-                          Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            color: Colors.red[800],
-                            size: 10,
-                          )
-                        ],
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (b) => ViewFood()));
+                        },
+                        child: Row(
+                          children: [
+                            Helper.text("View more", 12, 0, Colors.red[800],
+                                FontWeight.w600, TextAlign.center),
+                            Icon(
+                              Icons.arrow_forward_ios_outlined,
+                              color: Colors.red[800],
+                              size: 10,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
