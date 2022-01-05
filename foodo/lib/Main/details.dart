@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodo/Main/widgets/ratings.dart';
+import 'package:foodo/Main/wishlist.dart';
 import 'package:foodo/constants/text.dart';
 
 class Detail_Screen extends StatefulWidget {
@@ -299,17 +300,17 @@ class _Detail_ScreenState extends State<Detail_Screen> {
         .doc(widget.querySnapshot['name'])
         .set({
       "Pd name": widget.querySnapshot['name'],
+      'type':widget.querySnapshot['ingredienttype'],
       "amount": quantity! * widget.querySnapshot['amount'],
       "image": widget.querySnapshot['image'],
+      'rating':widget.querySnapshot['rating'],
       "quantity": quantity
     }).whenComplete(() {
-      setState(() {
-        isloading = false;
-      });
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Colors.grey[400],
           content: Helper.text("Items added to WishList", 15, 0, Colors.black,
               FontWeight.normal, TextAlign.center)));
+      Navigator.push(context, MaterialPageRoute(builder: (b) => WishList()));
     });
   }
 }
