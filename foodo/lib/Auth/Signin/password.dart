@@ -45,6 +45,7 @@ class _PasswordState extends State<Password> {
                     _signin();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                       behavior: SnackBarBehavior.floating,
                         backgroundColor: Colors.grey,
                         content: Helper.text(
                             "Enter valid details",
@@ -95,6 +96,7 @@ class _PasswordState extends State<Password> {
     }).catchError((e) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+         behavior: SnackBarBehavior.floating,
           content: Helper.text(e.toString(), 20, 0, Colors.black,
               FontWeight.normal, TextAlign.center)));
     });

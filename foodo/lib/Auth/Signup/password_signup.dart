@@ -220,6 +220,7 @@ class _Password_SignupState extends State<Password_Signup> {
                       password.text == cpcontroller.text) {
                     signup_email();
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                       behavior: SnackBarBehavior.floating,
                         backgroundColor: Colors.grey[400],
                         content: Helper.text(
                             "Verification mail was sent,Check your inbox",
@@ -275,6 +276,7 @@ class _Password_SignupState extends State<Password_Signup> {
     }).catchError((e) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+         behavior: SnackBarBehavior.floating,
           content: Helper.text(e.toString(), 20, 0, Colors.black,
               FontWeight.normal, TextAlign.center)));
     });

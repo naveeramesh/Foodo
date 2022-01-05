@@ -15,6 +15,7 @@ class Detail_Screen extends StatefulWidget {
 }
 
 class _Detail_ScreenState extends State<Detail_Screen> {
+  bool isincart = false;
   bool istapped = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool isloading = false;
@@ -22,6 +23,19 @@ class _Detail_ScreenState extends State<Detail_Screen> {
   var images = [];
   @override
   void initState() {
+    final Cartsnapshots = FirebaseFirestore.instance
+        .collection("Userinfo")
+        .doc(_auth.currentUser!.uid)
+        .collection("Cart")
+        .doc(widget.querySnapshot['name'])
+        .get()
+        .then((value) {
+      if (value.exists) {
+        setState(() {
+          isincart = true;
+        });
+      }
+    });
     widget.querySnapshot['ingredients'].forEach((element) {
       print(element);
       images.add(element);
@@ -237,7 +251,26 @@ class _Detail_ScreenState extends State<Detail_Screen> {
                             setState(() {
                               isloading = true;
                             });
-                            addcart();
+
+                            if (isincart == true) {
+                              setState(() {
+                                isloading = false;
+                              });
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    backgroundColor: Colors.grey[300],
+                                    behavior: SnackBarBehavior.floating,
+                                    content: Helper.text(
+                                        "Already added to cart",
+                                        20,
+                                        0,
+                                        Colors.black,
+                                        FontWeight.bold,
+                                        TextAlign.center)),
+                              );
+                            } else {
+                              addcart();
+                            }
                           },
                           child: Container(
                             height: 50,
@@ -286,6 +319,7 @@ class _Detail_ScreenState extends State<Detail_Screen> {
         isloading = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.grey[400],
           content: Helper.text("Items added to Cart", 15, 0, Colors.black,
               FontWeight.normal, TextAlign.center)));
@@ -300,13 +334,14 @@ class _Detail_ScreenState extends State<Detail_Screen> {
         .doc(widget.querySnapshot['name'])
         .set({
       "Pd name": widget.querySnapshot['name'],
-      'type':widget.querySnapshot['ingredienttype'],
+      'type': widget.querySnapshot['ingredienttype'],
       "amount": quantity! * widget.querySnapshot['amount'],
       "image": widget.querySnapshot['image'],
-      'rating':widget.querySnapshot['rating'],
+      'rating': widget.querySnapshot['rating'],
       "quantity": quantity
     }).whenComplete(() {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.grey[400],
           content: Helper.text("Items added to WishList", 15, 0, Colors.black,
               FontWeight.normal, TextAlign.center)));
