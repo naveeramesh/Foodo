@@ -21,6 +21,16 @@ class _WishListState extends State<WishList> {
         backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                Icons.clear,
+                color: Colors.black,
+              ))
+        ],
         title: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Helper.text("Wishlist", 18, 0, Colors.black, FontWeight.bold,
