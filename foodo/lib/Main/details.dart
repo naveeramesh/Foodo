@@ -14,6 +14,7 @@ class Detail_Screen extends StatefulWidget {
 }
 
 class _Detail_ScreenState extends State<Detail_Screen> {
+  bool istapped = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool isloading = false;
   int? quantity = 1;
@@ -48,10 +49,15 @@ class _Detail_ScreenState extends State<Detail_Screen> {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  istapped = true;
+                });
+                addwishlist();
+              },
               icon: Icon(
-                Icons.favorite_border,
-                color: Colors.black,
+                istapped ? Icons.favorite : Icons.favorite_border,
+                color: istapped ? Colors.red : Colors.black,
                 size: 18,
               ))
         ],
@@ -273,7 +279,7 @@ class _Detail_ScreenState extends State<Detail_Screen> {
       "Pd name": widget.querySnapshot['name'],
       "amount": quantity! * widget.querySnapshot['amount'],
       "image": widget.querySnapshot['image'],
-      "quantity":quantity
+      "quantity": quantity
     }).whenComplete(() {
       setState(() {
         isloading = false;
@@ -281,6 +287,28 @@ class _Detail_ScreenState extends State<Detail_Screen> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Colors.grey[400],
           content: Helper.text("Items added to Cart", 15, 0, Colors.black,
+              FontWeight.normal, TextAlign.center)));
+    });
+  }
+
+  void addwishlist() {
+    FirebaseFirestore.instance
+        .collection("Userinfo")
+        .doc(_auth.currentUser!.uid)
+        .collection("WishList")
+        .doc(widget.querySnapshot['name'])
+        .set({
+      "Pd name": widget.querySnapshot['name'],
+      "amount": quantity! * widget.querySnapshot['amount'],
+      "image": widget.querySnapshot['image'],
+      "quantity": quantity
+    }).whenComplete(() {
+      setState(() {
+        isloading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.grey[400],
+          content: Helper.text("Items added to WishList", 15, 0, Colors.black,
               FontWeight.normal, TextAlign.center)));
     });
   }
