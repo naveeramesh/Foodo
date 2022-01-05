@@ -91,13 +91,11 @@ class _Detail_ScreenState extends State<Detail_Screen> {
                   setState(() {
                     isloading = false;
                   });
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                        backgroundColor: Colors.grey[300],
-                        behavior: SnackBarBehavior.floating,
-                        content: Helper.text("Already added to cart", 20, 0,
-                            Colors.black, FontWeight.bold, TextAlign.center)),
-                  );
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.grey[400],
+                      content: Helper.text("Already in Wishlist", 15, 0,
+                          Colors.black, FontWeight.normal, TextAlign.center)));
                 } else {
                   addwishlist();
                 }
@@ -289,17 +287,16 @@ class _Detail_ScreenState extends State<Detail_Screen> {
                                 isloading = false;
                               });
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                    backgroundColor: Colors.grey[300],
-                                    behavior: SnackBarBehavior.floating,
-                                    content: Helper.text(
-                                        "Already added to cart",
-                                        20,
-                                        0,
-                                        Colors.black,
-                                        FontWeight.bold,
-                                        TextAlign.center)),
-                              );
+                                  SnackBar(
+                                      behavior: SnackBarBehavior.floating,
+                                      backgroundColor: Colors.grey[400],
+                                      content: Helper.text(
+                                          "Already in Cart",
+                                          15,
+                                          0,
+                                          Colors.black,
+                                          FontWeight.normal,
+                                          TextAlign.center)));
                             } else {
                               addcart();
                             }

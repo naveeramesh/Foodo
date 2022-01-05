@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodo/Main/cart.dart';
+import 'package:foodo/Main/wishlist.dart';
 import 'package:foodo/constants/text.dart';
 
 class UserHeader extends StatefulWidget {
@@ -18,6 +19,9 @@ class _UserHeaderState extends State<UserHeader> {
   FirebaseAuth _auth = FirebaseAuth.instance;
   String? name;
   String? address;
+  int? length;
+  int? wish_length;
+
   @override
   void initState() {
     FirebaseFirestore.instance
@@ -31,6 +35,27 @@ class _UserHeaderState extends State<UserHeader> {
         address = value.data()?['userlocation'];
       });
       print(name);
+    });
+    FirebaseFirestore.instance
+        .collection("Userinfo")
+        .doc(_auth.currentUser!.uid)
+        .collection("Cart")
+        .get()
+        .then((value) {
+      setState(() {
+        length = value.docs.length;
+      });
+      print(length);
+    });
+    FirebaseFirestore.instance
+        .collection("Userinfo")
+        .doc(_auth.currentUser!.uid)
+        .collection("WishList")
+        .get()
+        .then((value) {
+      setState(() {
+        wish_length = value.docs.length;
+      });
     });
 
     super.initState();
@@ -62,21 +87,53 @@ class _UserHeaderState extends State<UserHeader> {
             ],
           ),
           Spacer(),
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.search,
-                color: Colors.grey[400],
-              )),
-          IconButton(
-              onPressed: () {
+          Icon(
+            Icons.search,
+            color: Colors.grey[400],
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Stack(children: [
+            GestureDetector(
+              onTap: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (b) => Cart()));
+                    context, MaterialPageRoute(builder: (b) => WishList()));
               },
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.red[800],
-              ))
+              child: Icon(
+                Icons.favorite,
+                color: Colors.grey[400],
+              ),
+            ),
+            Positioned(
+                right: 0,
+                child: CircleAvatar(
+                  backgroundColor:
+                      wish_length == 0 ? Colors.transparent : Colors.red[800],
+                  radius: 3,
+                ))
+          ]),
+          Stack(children: [
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (b) => Cart()));
+                },
+                icon: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.grey[400],
+                )),
+            Positioned(
+                top: 10,
+                right: 10,
+                child: CircleAvatar(
+                  backgroundColor:
+                      length == 0 ? Colors.transparent : Colors.red[800],
+                  radius: 5,
+                  child: Helper.text(length.toString(), 5, 0, Colors.white,
+                      FontWeight.bold, TextAlign.center),
+                ))
+          ])
         ],
       ),
     );
