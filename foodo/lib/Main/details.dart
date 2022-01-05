@@ -16,6 +16,7 @@ class Detail_Screen extends StatefulWidget {
 
 class _Detail_ScreenState extends State<Detail_Screen> {
   bool isincart = false;
+  bool isinwishlist = false;
   bool istapped = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool isloading = false;
@@ -23,7 +24,7 @@ class _Detail_ScreenState extends State<Detail_Screen> {
   var images = [];
   @override
   void initState() {
-    final Cartsnapshots = FirebaseFirestore.instance
+    FirebaseFirestore.instance
         .collection("Userinfo")
         .doc(_auth.currentUser!.uid)
         .collection("Cart")
@@ -36,6 +37,20 @@ class _Detail_ScreenState extends State<Detail_Screen> {
         });
       }
     });
+    FirebaseFirestore.instance
+        .collection("Userinfo")
+        .doc(_auth.currentUser!.uid)
+        .collection("Wishlist")
+        .doc(widget.querySnapshot['name'])
+        .get()
+        .then((value) {
+      if (value.exists) {
+        setState(() {
+          isinwishlist = true;
+        });
+      }
+    });
+
     widget.querySnapshot['ingredients'].forEach((element) {
       print(element);
       images.add(element);
@@ -68,7 +83,24 @@ class _Detail_ScreenState extends State<Detail_Screen> {
                 setState(() {
                   istapped = true;
                 });
-                addwishlist();
+                setState(() {
+                  isloading = true;
+                });
+
+                if (isincart == true) {
+                  setState(() {
+                    isloading = false;
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                        backgroundColor: Colors.grey[300],
+                        behavior: SnackBarBehavior.floating,
+                        content: Helper.text("Already added to cart", 20, 0,
+                            Colors.black, FontWeight.bold, TextAlign.center)),
+                  );
+                } else {
+                  addwishlist();
+                }
               },
               icon: Icon(
                 istapped ? Icons.favorite : Icons.favorite_border,
