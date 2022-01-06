@@ -22,7 +22,7 @@ class _TopOrdersState extends State<TopOrders> {
         builder: (context, snapshot) {
           return ListView.builder(
             scrollDirection: Axis.vertical,
-            itemCount: 2,
+            itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.only(
