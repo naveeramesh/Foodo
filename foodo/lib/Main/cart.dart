@@ -14,6 +14,7 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   num? fullamount = 0;
+  int? length;
   @override
   void initState() {
     FirebaseFirestore.instance
@@ -22,9 +23,12 @@ class _CartState extends State<Cart> {
         .collection("Cart")
         .get()
         .then((value) {
+      setState(() {
+        length = value.docs.length;
+      });
       value.docs.forEach((element) {
         setState(() {
-          fullamount = fullamount! + element.data()["amount"];
+          // fullamount = fullamount! + element.data()["amount"];
         });
         print(element.data()["amount"].toString());
         print(fullamount);
@@ -37,23 +41,25 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Helper.text("₹" + " ${fullamount}", 15, 0, Colors.black,
-                  FontWeight.bold, TextAlign.center),
-            ),
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Buttons.Button(
-                  Colors.red[800], 10, 50, 150, "Confirm Order", Colors.white),
+      bottomNavigationBar: length != 0
+          ? BottomAppBar(
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Helper.text("₹" + " ${fullamount}", 15, 0,
+                        Colors.black, FontWeight.bold, TextAlign.center),
+                  ),
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Buttons.Button(Colors.red[800], 10, 50, 150,
+                        "Confirm Order", Colors.white),
+                  )
+                ],
+              ),
             )
-          ],
-        ),
-      ),
+          : null,
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
@@ -73,180 +79,211 @@ class _CartState extends State<Cart> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
-              .collection("Userinfo")
-              .doc(FirebaseAuth.instance.currentUser!.uid)
-              .collection("Cart")
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            } else {
-              return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20.0, right: 20, left: 20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey[200],
-                      ),
-                      height: 120,
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        children: [
-                          Row(
+            stream: FirebaseFirestore.instance
+                .collection("Userinfo")
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .collection("Cart")
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else {
+                if (snapshot.data?.docs.length == 0) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height / 3,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                       height: 100,
+                        width: double.infinity,
+                        child: Image.network("https://cdn-icons-png.flaticon.com/512/590/590506.png",),),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Center(
+                              child: Helper.text(
+                                  "Your bucket list is empty",
+                                  20,
+                                  0,
+                                  Colors.black,
+                                  FontWeight.bold,
+                                  TextAlign.center)),
+                        ),
+                        Buttons.Button(Colors.red[800], 10, 50, 250,
+                            "Continue Shopping", Colors.white)
+                      ],
+                    ),
+                  );
+                } else {
+                  return ListView.builder(
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            top: 20.0, right: 20, left: 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey[200],
+                          ),
+                          height: 120,
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 20.0, top: 10),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: NetworkImage(snapshot
-                                            .data!.docs[index]['image']),
-                                        fit: BoxFit.cover),
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.grey[200],
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, top: 10),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(snapshot
+                                                .data!.docs[index]['image']),
+                                            fit: BoxFit.cover),
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.grey[200],
+                                      ),
+                                      height: 80,
+                                      width: 90,
+                                    ),
                                   ),
-                                  height: 80,
-                                  width: 90,
-                                ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 20.0),
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width -
+                                          200,
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Helper.text(
+                                                    snapshot.data!.docs[index]
+                                                        ['Pd name'],
+                                                    15,
+                                                    0,
+                                                    Colors.black,
+                                                    FontWeight.bold,
+                                                    TextAlign.center),
+                                                Helper.text(
+                                                    "  ₹ " +
+                                                        snapshot
+                                                            .data!
+                                                            .docs[index]
+                                                                ['amount']
+                                                            .toString(),
+                                                    13,
+                                                    0,
+                                                    Colors.grey,
+                                                    FontWeight.bold,
+                                                    TextAlign.start)
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Helper.text(
+                                                    "₹ " +
+                                                        "${snapshot.data!.docs[index]['amount'] * snapshot.data!.docs[index]['quantity']}",
+                                                    13,
+                                                    0,
+                                                    Colors.black,
+                                                    FontWeight.bold,
+                                                    TextAlign.start),
+                                                SizedBox(width: 5),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            2),
+                                                    color: Colors.grey[300],
+                                                  ),
+                                                  height: 25,
+                                                  child: Row(
+                                                    children: [
+                                                      Helper.text(
+                                                          " Qty : " +
+                                                              snapshot
+                                                                  .data!
+                                                                  .docs[index][
+                                                                      'quantity']
+                                                                  .toString(),
+                                                          13,
+                                                          0,
+                                                          Colors.black,
+                                                          FontWeight.bold,
+                                                          TextAlign.center),
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          print(index);
+                                                          showModalBottomSheet(
+                                                              context: context,
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .vertical(
+                                                                            top:
+                                                                                Radius.circular(25.0)),
+                                                              ),
+                                                              builder:
+                                                                  (context) =>
+                                                                      modelSheet(
+                                                                        name: snapshot
+                                                                            .data!
+                                                                            .docs[index]['Pd name'],
+                                                                      ));
+                                                        },
+                                                        child: Icon(
+                                                          Icons
+                                                              .arrow_drop_down_outlined,
+                                                          color:
+                                                              Colors.red[700],
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ]),
+                                    ),
+                                  ),
+                                ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 20.0),
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width - 200,
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Helper.text(
-                                                snapshot.data!.docs[index]
-                                                    ['Pd name'],
-                                                15,
-                                                0,
-                                                Colors.black,
-                                                FontWeight.bold,
-                                                TextAlign.center),
-                                            Helper.text(
-                                                "  ₹ " +
-                                                    snapshot.data!
-                                                        .docs[index]['amount']
-                                                        .toString(),
-                                                13,
-                                                0,
-                                                Colors.grey,
-                                                FontWeight.bold,
-                                                TextAlign.start)
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Helper.text(
-                                                "₹ " +
-                                                    "${snapshot.data!.docs[index]['amount'] * snapshot.data!.docs[index]['quantity']}",
-                                                13,
-                                                0,
-                                                Colors.black,
-                                                FontWeight.bold,
-                                                TextAlign.start),
-                                            SizedBox(width: 5),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(2),
-                                                color: Colors.grey[300],
-                                              ),
-                                              height: 25,
-                                              child: Row(
-                                                children: [
-                                                  Helper.text(
-                                                      " Qty : " +
-                                                          snapshot
-                                                              .data!
-                                                              .docs[index]
-                                                                  ['quantity']
-                                                              .toString(),
-                                                      13,
-                                                      0,
-                                                      Colors.black,
-                                                      FontWeight.bold,
-                                                      TextAlign.center),
-                                                  GestureDetector(
-                                                    onTap: () {
-                                                      print(index);
-                                                      showModalBottomSheet(
-                                                          context: context,
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius.vertical(
-                                                                    top: Radius
-                                                                        .circular(
-                                                                            25.0)),
-                                                          ),
-                                                          builder: (context) =>
-                                                              modelSheet(
-                                                                name: snapshot
-                                                                        .data!
-                                                                        .docs[index]
-                                                                    ['Pd name'],
-                                                              ));
-                                                    },
-                                                    child: Icon(
-                                                      Icons
-                                                          .arrow_drop_down_outlined,
-                                                      color: Colors.red[700],
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ]),
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        delete(snapshot.data!.docs[index]
+                                            ['Pd name']);
+                                      },
+                                      child: Helper.text(
+                                          "Delete",
+                                          10,
+                                          0,
+                                          Colors.red[800],
+                                          FontWeight.bold,
+                                          TextAlign.center),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    delete(
-                                        snapshot.data!.docs[index]['Pd name']);
-                                  },
-                                  child: Helper.text(
-                                      "Delete",
-                                      10,
-                                      0,
-                                      Colors.red[800],
-                                      FontWeight.bold,
-                                      TextAlign.center),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      );
+                    },
                   );
-                },
-              );
-            }
-          },
-        ),
+                }
+              }
+            }),
       ),
     );
   }
