@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
           backgroundColor: Colors.white, elevation: 0, title: UserHeader()),
       body: SingleChildScrollView(
         child: Container(
