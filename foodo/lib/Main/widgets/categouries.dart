@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:foodo/Main/category_view.dart';
 import 'package:foodo/constants/text.dart';
 
 class Category extends StatefulWidget {
@@ -26,14 +27,23 @@ class _CategoryState extends State<Category> {
                     padding: const EdgeInsets.only(
                       left: 20.0,
                     ),
-                    child: Container(
-                      width: 100,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  snapshot.data!.docs[index]['Image']),
-                              fit: BoxFit.cover)),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (b) => Category_View(
+                                    name: snapshot.data!.docs[index]['name'])));
+                      },
+                      child: Container(
+                        width: 100,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    snapshot.data!.docs[index]['Image']),
+                                fit: BoxFit.cover)),
+                      ),
                     ),
                   ),
                   Positioned(
@@ -44,7 +54,8 @@ class _CategoryState extends State<Category> {
                           12,
                           0,
                           Colors.white,
-                          FontWeight.w600,TextAlign.center))
+                          FontWeight.w600,
+                          TextAlign.center))
                 ]);
               },
             );

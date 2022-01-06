@@ -87,7 +87,7 @@ class _CartState extends State<Cart> {
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return Center(child: CircularProgressIndicator(color: Colors.red,));
               } else {
                 if (snapshot.data?.docs.length == 0) {
                   return Container(
@@ -96,7 +96,7 @@ class _CartState extends State<Cart> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          height: 100,
+                          height: 50,
                           width: double.infinity,
                           child: Image.network(
                             "https://cdn-icons-png.flaticon.com/512/590/590506.png",
