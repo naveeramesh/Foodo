@@ -14,7 +14,7 @@ class _PosterState extends State<Poster> {
       padding:
           const EdgeInsets.only(top: 22.0, left: 20, right: 20, bottom: 20),
       child: Container(
-        height: MediaQuery.of(context).size.height / 5,
+        height: MediaQuery.of(context).size.height / 3,
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),

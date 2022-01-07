@@ -21,8 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-          backgroundColor: Colors.white, elevation: 0, title: UserHeader()),
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: UserHeader()),
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
@@ -73,7 +75,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              TopOrders()
+              TopOrders(),
+              // Poster(),
+              Padding(
+                padding: const EdgeInsets.only(top: 15.0, left: 20, bottom: 15),
+                child: Row(
+                  children: [
+                    Helper.text("All foods available", 18, 0, Colors.black,
+                        FontWeight.w600, TextAlign.center),
+
+                  ],
+                ),
+              ),
+             
             ],
           ),
         ),

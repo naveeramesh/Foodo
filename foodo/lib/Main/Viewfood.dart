@@ -33,7 +33,9 @@ class _ViewFoodState extends State<ViewFood> {
         height: MediaQuery.of(context).size.height,
         child: StreamBuilder<QuerySnapshot>(
           stream:
-              FirebaseFirestore.instance.collection("TopOrders").snapshots(),
+              FirebaseFirestore.instance.collection("TopOrders")
+              .where("toporder",isEqualTo: "s")
+              .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
