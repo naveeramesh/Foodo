@@ -21,6 +21,8 @@ class _LocationState extends State<Location> {
   var lattiude = '';
   var longitude = '';
   var address = '';
+  // Position? _currentPosition;
+  // String _currentAddress = "";
   @override
   void initState() {
     getlocation();
@@ -39,8 +41,8 @@ class _LocationState extends State<Location> {
           child: Lottie.network(
               "https://assets1.lottiefiles.com/temp/lf20_EVDaJ0.json"),
         )),
-        Helper.text("Fetching Location", 20, 0, Colors.black, FontWeight.bold,TextAlign.center),
-       
+        Helper.text("Fetching Location", 20, 0, Colors.black, FontWeight.bold,
+            TextAlign.center),
       ],
     ));
   }
@@ -76,7 +78,31 @@ class _LocationState extends State<Location> {
       getAddress(position);
     });
   }
+  // _getCurrentLocation() async {
+  //   await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+  //       .then((Position position) {
+  //     setState(() {
+  //       getAddress(position.latitude, position.longitude);
+  //     });
+  //   }).catchError((e) {
+  //     print(e);
+  //   });
+  // }
 
+  // getAddress(double latitude, double longitude) async {
+  //   try {
+  //     List<Placemark> p = await placemarkFromCoordinates(latitude, longitude);
+
+  //     Placemark place = p[0];
+
+  //     setState(() {
+  //       _currentAddress = "${place.locality}";
+  //       print(_currentAddress);
+  //     });
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
   Future<void> getAddress(Position position) async {
     List<Placemark> placemark =
         await placemarkFromCoordinates(position.latitude, position.longitude);
@@ -99,9 +125,11 @@ class _LocationState extends State<Location> {
       'userlocation': address,
     }).whenComplete(() {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (b) => HomeScreen(
-            address: address,
-          )));
+          context,
+          MaterialPageRoute(
+              builder: (b) => HomeScreen(
+                    address: address,
+                  )));
     });
   }
 }

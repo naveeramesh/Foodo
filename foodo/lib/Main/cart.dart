@@ -29,9 +29,9 @@ class _CartState extends State<Cart> {
       });
       value.docs.forEach((element) {
         setState(() {
-          // fullamount = fullamount! + element.data()["amount"];
+          fullamount = fullamount! + element.data()["final amount"];
         });
-        print(element.data()["amount"].toString());
+
         print(fullamount);
       });
     });
@@ -87,7 +87,10 @@ class _CartState extends State<Cart> {
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator(color: Colors.red,));
+                return Center(
+                    child: CircularProgressIndicator(
+                  color: Colors.red,
+                ));
               } else {
                 if (snapshot.data?.docs.length == 0) {
                   return Container(
