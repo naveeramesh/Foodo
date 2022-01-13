@@ -45,7 +45,7 @@ class _PasswordState extends State<Password> {
                     _signin();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                       behavior: SnackBarBehavior.floating,
+                        behavior: SnackBarBehavior.floating,
                         backgroundColor: Colors.grey,
                         content: Helper.text(
                             "Enter valid details",
@@ -96,14 +96,17 @@ class _PasswordState extends State<Password> {
     }).catchError((e) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-         behavior: SnackBarBehavior.floating,
+          behavior: SnackBarBehavior.floating,
           content: Helper.text(e.toString(), 20, 0, Colors.black,
               FontWeight.normal, TextAlign.center)));
     });
     if (currentUser != null) {
       get_data(_auth.currentUser!.uid);
     } else {
-      print("Something went wrong");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        behavior: SnackBarBehavior.floating,
+          content: Helper.text("Something went wrong,Please try again later.",
+              18, 0, Colors.black, FontWeight.bold, TextAlign.center)));
     }
   }
 
