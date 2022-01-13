@@ -50,45 +50,48 @@ class _WishListState extends State<WishList> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                child: CircularProgressIndicator(color: Colors.red,),
+                child: CircularProgressIndicator(
+                  color: Colors.red,
+                ),
               );
             } else {
               if (snapshot.data?.docs.length == 0) {
-                  return Container(
-                    height: MediaQuery.of(context).size.height / 3,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.red[200],
-                          child: Icon(Icons.favorite,color: Colors.white,),
+                return Container(
+                  height: MediaQuery.of(context).size.height / 3,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Colors.red[200],
+                        child: Icon(
+                          Icons.favorite,
+                          color: Colors.white,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Center(
-                              child: Helper.text(
-                                  "Your wishlist is empty",
-                                  20,
-                                  0,
-                                  Colors.black,
-                                  FontWeight.bold,
-                                  TextAlign.center)),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (b) => HomeScreen()));
-                          },
-                          child: Buttons.Button(Colors.red[800], 10, 50, 250,
-                              "Continue Shopping", Colors.white),
-                        )
-                      ],
-                    ),
-                  );
-                }
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Center(
+                            child: Helper.text(
+                                "Your wishlist is empty",
+                                20,
+                                0,
+                                Colors.black,
+                                FontWeight.bold,
+                                TextAlign.center)),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (b) => HomeScreen()));
+                        },
+                        child: Buttons.Button(Colors.red[800], 10, 50, 250,
+                            "Continue Shopping", Colors.white),
+                      )
+                    ],
+                  ),
+                );
+              }
               return Padding(
                 padding:
                     const EdgeInsets.only(left: 20.0, right: 20, bottom: 20),
@@ -175,20 +178,54 @@ class _WishListState extends State<WishList> {
                           padding: const EdgeInsets.only(top: 3.0),
                           child: Row(
                             children: [
-                              Container(
-                                height: 30,
-                                width: 90,
-                                decoration: BoxDecoration(
-                                    color: Colors.red[800],
-                                    borderRadius: BorderRadius.circular(6)),
-                                child: Center(
-                                    child: Helper.text(
-                                        "Add to bag",
-                                        12,
-                                        0,
-                                        Colors.white,
-                                        FontWeight.bold,
-                                        TextAlign.center)),
+                              GestureDetector(
+                                onTap: () {
+                                  FirebaseFirestore.instance
+                                      .collection("Userinfo")
+                                      .doc(_auth.currentUser?.uid)
+                                      .collection("Cart")
+                                      .doc(
+                                          snapshot.data?.docs[index]['Pd name'])
+                                      .set({
+                                    "Pd name": snapshot.data?.docs[index]
+                                        ['Pd name'],
+                                    "amount": snapshot.data?.docs[index]
+                                        ['amount'],
+                                    "image": snapshot.data?.docs[index]
+                                        ['image'],
+                                    'quantity': snapshot.data?.docs[index]
+                                        ['quantity'],
+                                    "final amount": snapshot.data?.docs[index]
+                                        ['amount'],
+                                  }).whenComplete(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                            behavior: SnackBarBehavior.floating,
+                                            backgroundColor: Colors.grey[400],
+                                            content: Helper.text(
+                                                "Items added to Cart",
+                                                15,
+                                                0,
+                                                Colors.black,
+                                                FontWeight.normal,
+                                                TextAlign.center)));
+                                  });
+                                },
+                                child: Container(
+                                  height: 30,
+                                  width: 90,
+                                  decoration: BoxDecoration(
+                                      color: Colors.red[800],
+                                      borderRadius: BorderRadius.circular(6)),
+                                  child: Center(
+                                      child: Helper.text(
+                                          "Add to bag",
+                                          12,
+                                          0,
+                                          Colors.white,
+                                          FontWeight.bold,
+                                          TextAlign.center)),
+                                ),
                               ),
                               GestureDetector(
                                 onTap: () {

@@ -367,7 +367,8 @@ class _Detail_ScreenState extends State<Detail_Screen> {
       "amount": quantity! * widget.querySnapshot['amount'],
       "image": widget.querySnapshot['image'],
       'rating': widget.querySnapshot['rating'],
-      "quantity": quantity
+      "quantity": quantity,
+      "final amount": quantity! * widget.querySnapshot['amount'],
     }).whenComplete(() {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           behavior: SnackBarBehavior.floating,
