@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:foodo/Main/home_view.dart';
+import 'Auth/location.dart';
 import 'Onboarding/onboarding_view.dart';
 
 void main() async {

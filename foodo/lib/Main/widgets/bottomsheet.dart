@@ -59,16 +59,17 @@ class _modelSheetState extends State<modelSheet> {
                                     snapshot.data!.docs[0]['quantity'] - 1,
                                 'amount': snapshot.data!.docs[0]['amount']
                               }).whenComplete(() {
-                          FirebaseFirestore.instance
-                              .collection("Userinfo")
-                              .doc(FirebaseAuth.instance.currentUser!.uid)
-                              .collection("Cart")
-                              .doc(widget.name)
-                              .update({
-                            "final amount": snapshot.data!.docs[0]['amount'] *
-                                (snapshot.data!.docs[0]['quantity']-1)
-                          });
-                        });
+                                FirebaseFirestore.instance
+                                    .collection("Userinfo")
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .collection("Cart")
+                                    .doc(widget.name)
+                                    .update({
+                                  "final amount": snapshot.data!.docs[0]
+                                          ['amount'] *
+                                      (snapshot.data!.docs[0]['quantity'] - 1)
+                                });
+                              });
                       },
                       child: Container(
                         height: 20,
@@ -105,7 +106,7 @@ class _modelSheetState extends State<modelSheet> {
                               .doc(widget.name)
                               .update({
                             "final amount": snapshot.data!.docs[0]['amount'] *
-                                (snapshot.data!.docs[0]['quantity']+1)
+                                (snapshot.data!.docs[0]['quantity'] + 1)
                           });
                         });
                       },
